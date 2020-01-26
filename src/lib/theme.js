@@ -4,19 +4,21 @@ const theme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {
-      main: '#0a0909',
+      main: '#ffa726',
     },
     secondary: {
-      main: '#ff7315',
+      main: '#9c27b0',
     },
     background: {
-      default: '#232020',
-      paper: '#0f0e0e',
-      elevation: 'rgba(255, 255, 255, 0.04)',
+      default: '#121212',
+      paper: '#1e1e1e',
+      elevation1: '#1e1e1e',
+      elevation2: '#232323',
+      elevation3: '#252525',
     },
     text: {
       primary: '#f4f4f4',
-      secondary: '#6f6666',
+      secondary: 'rgba(255, 255, 255, 0.6)',
     }
   },
 });
