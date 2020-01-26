@@ -4,5 +4,4 @@ import ContentSection from './components/ContentSection/ContentSection';
 import SmartList from './components/SmartList/SmartList';
 
 
-
-export defaut { Window, Header, ContentSection, SmartList };
+export default { Window, Header, ContentSection, SmartList };
