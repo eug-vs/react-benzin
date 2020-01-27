@@ -12,13 +12,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0, 2, 1, 2),
     marginBottom: theme.spacing(1),
 
-    '& a': {
-      color: theme.palette.secondary.light,
-    },
     '& .MuiButton-root': {
-      color: theme.palette.background.paper,
       margin: theme.spacing(1, 2, 2, 0),
-      fontWeight: 'bold',
     },
   },
 }));
