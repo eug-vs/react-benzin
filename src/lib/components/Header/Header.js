@@ -9,20 +9,16 @@ import {
 } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
-import TimerIcon from '@material-ui/icons/Timer';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import GitHubIcon from '@material-ui/icons/GitHub';
 
 
 const useStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.background.elevation2,
     color: theme.palette.text.primary,
+    paddingLeft: theme.spacing(3),
   },
   logo: {
-    margin: theme.spacing(0, 3, 0, 3),
-    color: theme.palette.primary.main,
+    margin: theme.spacing(0, 3, 0, 1),
   },
   tab: {
     '& .MuiTab-wrapper': {
@@ -37,31 +33,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const Header = ({ page, setPage }) => {
+const Header = ({ logo, contents, page, setPage }) => {
   const classes = useStyles();
 
   const handleChange = (event, newPage) => {
     setPage(newPage);
   };
 
-  const icons = {
-    app: (<TimerIcon />),
-    profile: (<AccountCircleIcon />),
-    scoreboard: (<AssignmentIcon />),
-    contribute: (<GitHubIcon />),
-  };
-
   return (
   <AppBar position="sticky" className={classes.root}>
     <Toolbar>
-      <Typography variant="h4" className={classes.logo}>
-        ChronoCube
-      </Typography>
+        {logo.icon}
+        <Typography variant="h4" className={classes.logo} color="primary">
+          {logo.title}
+        </Typography>
       <Tabs onChange={handleChange} value={page}>
-        { Object.keys(icons).map(item => (
+        {contents && Object.keys(contents).map(item => (
           <Tab
             label={item}
-            icon={icons[item]}
+            icon={contents[item]}
             value={item}
             className={classes.tab}
             key={item}
