@@ -1,6 +1,8 @@
-import { createMuiTheme } from '@material-ui/core/styles'
+import React from 'react';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
-const theme = createMuiTheme({
+
+const benzinTheme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {
@@ -23,4 +25,13 @@ const theme = createMuiTheme({
   },
 });
 
-export default theme;
+
+const BenzinThemeProvider = ({ children }) => (
+  <ThemeProvider theme={benzinTheme}>
+    {children}
+  </ThemeProvider>
+);
+
+
+export default BenzinThemeProvider;
+
