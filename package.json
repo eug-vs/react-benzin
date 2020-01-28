@@ -1,6 +1,6 @@
 {
   "name": "react-benzin",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A powerful React Material components library.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -11,8 +11,8 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "eslint .",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
-    "deploy": "npm test && npm run build && npm publish --public"
+    "build": "rm -rf dist && tsc --project ts-compile-config.json",
+    "deploy": "eslint src/lib && npm run build && npm publish --public"
   },
   "license": "MIT",
   "dependencies": {
@@ -26,9 +26,6 @@
     "typeface-roboto": "0.0.75"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.3",
-    "@babel/core": "^7.8.3",
-    "@babel/preset-react": "^7.8.3",
     "@types/node": "^13.5.0",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
