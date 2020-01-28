@@ -2,8 +2,17 @@ import React from 'react';
 
 import { Paper, makeStyles } from '@material-ui/core';
 
+import { SurfaceSize, SurfacePosition } from './types';
 
-const useStyles = makeStyles(theme => ({
+
+interface PropTypes {
+  size: SurfaceSize;
+  position: SurfacePosition;
+  children?: any;
+}
+
+
+const useStyles = makeStyles((theme: any) => ({
   surface: {
     position: 'absolute',
     display: 'flex',
@@ -18,8 +27,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const WindowSurface = ({ size, position, children }) => {
+const WindowSurface = (props: PropTypes) => {
   const classes = useStyles();
+  const { size, position, children } = props;
 
   return (
     <Paper
