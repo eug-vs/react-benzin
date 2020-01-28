@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
     '& .MuiTab-wrapper': {
       padding: theme.spacing(2),
       flexDirection: 'row',
+      fontSize: '0.8125rem',
       '& svg': {
         marginRight: theme.spacing(1),
         marginBottom: '0 !important',
@@ -43,10 +44,10 @@ const Header = ({ logo, contents, page, setPage }) => {
   return (
   <AppBar position="sticky" className={classes.root}>
     <Toolbar>
-        {logo.icon}
-        <Typography variant="h4" className={classes.logo} color="primary">
-          {logo.title}
-        </Typography>
+      {logo.icon}
+      <Typography variant="h5" className={classes.logo} color="primary">
+        {logo.title}
+      </Typography>
       <Tabs onChange={handleChange} value={page}>
         {contents && Object.keys(contents).map(item => (
           <Tab

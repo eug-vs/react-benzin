@@ -18,9 +18,6 @@ import ExploreIcon from '@material-ui/icons/Explore';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 
-
-
-
 const useStyles = makeStyles(theme => ({
   window: {
     padding: theme.spacing(4),
@@ -34,7 +31,7 @@ const headerContents = {
   contribute: <GitHubIcon />,
 }
 
-const Icon1 = <img src={icon} width="40px" height="46.25px" alt="logo"/>
+const Icon1 = <img src={icon} width="32px" height="37px" alt="logo"/>
 const Icon2 = <img src={icon2} height="32px" alt="logo"/>
 
 const App = () => {
