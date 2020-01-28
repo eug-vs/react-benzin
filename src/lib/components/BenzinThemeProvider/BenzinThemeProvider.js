@@ -1,5 +1,6 @@
 import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
 import 'typeface-roboto';
 
 
@@ -29,6 +30,7 @@ const benzinTheme = createMuiTheme({
 
 const BenzinThemeProvider = ({ children }) => (
   <ThemeProvider theme={benzinTheme}>
+    <CssBaseline />
     {children}
   </ThemeProvider>
 );

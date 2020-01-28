@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { CssBaseline, makeStyles, Button } from '@material-ui/core';
+import { makeStyles, Button } from '@material-ui/core';
 
 import {
   BenzinThemeProvider,
@@ -40,7 +40,6 @@ const App = () => {
 
   return (
     <BenzinThemeProvider>
-      <CssBaseline />
       <Header
         logo={{
           icon: Icon1,
