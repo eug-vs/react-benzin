@@ -6,6 +6,7 @@
   "module": "dist/index.js",
   "scripts": {
     "start": "react-scripts start",
+    "test": "eslint .",
     "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files"
   },
   "license": "MIT",
@@ -23,7 +24,9 @@
     "@babel/cli": "^7.8.3",
     "@babel/core": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
-    "eslint": "^6.8.0"
+    "eslint": "^6.8.0",
+    "eslint-config-react-app": "^5.1.0",
+    "typescript": "^3.7.5"
   },
   "browserslist": {
     "production": [
