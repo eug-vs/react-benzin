@@ -4,10 +4,15 @@
   "description": "A powerful React Material components library.",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "test": "eslint .",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files"
+    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
+    "deploy": "npm test && npm run build && npm publish --public"
   },
   "license": "MIT",
   "dependencies": {
