@@ -9,7 +9,6 @@ import { SurfaceSize, SurfacePosition } from './types';
 interface PropTypes {
   type: 'primary' | 'secondary' | 'mono';
   name?: string;
-  children?: any;
 }
 
 
@@ -21,9 +20,8 @@ const useStyles = makeStyles((theme: any) => ({
 }));
 
 
-const Window = (props: PropTypes) => {
+const Window: React.FC<PropTypes> = ({ type, name, children }) => {
   const classes = useStyles();
-  const { type, name, children } = props;
 
   const size: SurfaceSize = {
     height: '85vh',

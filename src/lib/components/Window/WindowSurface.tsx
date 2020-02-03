@@ -8,7 +8,6 @@ import { SurfaceSize, SurfacePosition } from './types';
 interface PropTypes {
   size: SurfaceSize;
   position: SurfacePosition;
-  children?: any;
 }
 
 
@@ -27,9 +26,8 @@ const useStyles = makeStyles((theme: any) => ({
 }));
 
 
-const WindowSurface = (props: PropTypes) => {
+const WindowSurface: React.FC<PropTypes> = ({ size, position, children }) => {
   const classes = useStyles();
-  const { size, position, children } = props;
 
   return (
     <Paper
