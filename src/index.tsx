@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { makeStyles, Button } from '@material-ui/core';
+import { makeStyles, Button, Typography } from '@material-ui/core';
 
 import {
   BenzinThemeProvider,
   Header,
   Window,
   ContentSection,
+  SmartList,
 } from './lib';
 
 import icon from './assets/icon.png';
@@ -29,7 +30,13 @@ const headerContents = {
   'getting started': <PlayCircleFilledWhiteIcon />,
   explore: <ExploreIcon />,
   contribute: <GitHubIcon />,
-}
+};
+
+const renderItem = ({ index, style }: any) => {
+  return (
+      <Typography variant="h3" style={style} component="div"> {index} </Typography>
+  );
+};
 
 const Icon1 = <img src={icon} width="32px" height="37px" alt="logo"/>
 const Icon2 = <img src={icon2} height="32px" alt="logo"/>
@@ -49,7 +56,7 @@ const App = () => {
         page={page}
         setPage={setPage}
       />
-      <Window type="mono">
+      <Window type="primary">
         <div className={classes.window}>
           <ContentSection sectionName="Out of fuel? You've came to the right place!">
             <p> Here is some text about BENZIN library. </p>
@@ -61,6 +68,13 @@ const App = () => {
             </Button>
           </ContentSection>
         </div>
+      </Window>
+      <Window type="secondary" name="SmartList test window">
+        <SmartList
+          itemSize={270}
+          itemCount={100}
+          renderItem={renderItem}
+        />
       </Window>
     </BenzinThemeProvider>
   );
