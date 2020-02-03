@@ -7,6 +7,10 @@ import {
 } from '@material-ui/core';
 
 
+interface PropTypes {
+  sectionName: string;
+}
+
 const useStyles = makeStyles(theme => ({
   content: {
     padding: theme.spacing(0, 2, 1, 2),
@@ -18,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ContentSection = ({ sectionName, children }) => {
+const ContentSection: React.FC<PropTypes> = ({ sectionName, children }) => {
   const classes = useStyles();
 
   return (
