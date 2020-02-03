@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: any) => ({
 const Header: React.FC<PropTypes> = ({ logo, contents, page, setPage }) => {
   const classes = useStyles();
 
-  const handleChange = (event: any, newPage: string) => {
+  const handleChange = (event: React.ChangeEvent<{}>, newPage: string) => {
     setPage(newPage);
   };
 
