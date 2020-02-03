@@ -15,7 +15,7 @@ jobs:
             - v1-dependencies-
 
       - run:
-          name: install NPM dependencies
+          name: Install NPM dependencies
           command: npm install
 
       - save_cache:
@@ -24,6 +24,20 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
-          name: Test code syntax with eslint
+          name: Test syntax and perform type checking
           command: npm test
+
+  deploy:
+    requires:
+      - build
+    filters:
+      tags:
+        only: /^v.*/
+    steps:
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Deploy package
+          command: npm run deploy
 
