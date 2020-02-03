@@ -25,5 +25,5 @@ jobs:
 
       - run:
           name: Test code syntax with eslint
-          command: npx eslint .
+          command: npm test
 
