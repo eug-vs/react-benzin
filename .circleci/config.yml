@@ -28,6 +28,8 @@ jobs:
           command: npm test
 
   deploy:
+    docker:
+      - image: circleci/node:12-stretch
     requires:
       - build
     filters:
