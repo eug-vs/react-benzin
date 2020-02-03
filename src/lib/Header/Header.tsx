@@ -16,12 +16,12 @@ interface PropTypes {
     icon: React.ReactNode;
     title: string;
   };
-  contents: any;
+  contents: {
+    [key: string]: React.ReactNode;
+  };
   page: string;
   setPage: any;
 }
-
-
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
