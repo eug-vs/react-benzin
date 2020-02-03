@@ -20,7 +20,7 @@ interface PropTypes {
     [key: string]: React.ReactNode | null;
   };
   page: string;
-  setPage: any;
+  setPage: (newPage: string) => void;
 }
 
 const useStyles = makeStyles((theme: any) => ({
