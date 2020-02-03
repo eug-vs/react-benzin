@@ -11,12 +11,7 @@ import {
   SmartList,
 } from './lib';
 
-import icon from './assets/icon.png';
-import icon2 from './assets/icon2.svg';
-import HomeIcon from '@material-ui/icons/Home';
-import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite';
-import ExploreIcon from '@material-ui/icons/Explore';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import icon from './assets/icon.svg';
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,11 +20,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+const Icon = <img src={icon} width="32px" height="37px" alt="logo"/>
+
 const headerContents = {
-  home: <HomeIcon />,
-  'getting started': <PlayCircleFilledWhiteIcon />,
-  explore: <ExploreIcon />,
-  contribute: <GitHubIcon />,
+  home: null,
+  page: null,
+  'another page': null,
 };
 
 const renderItem = ({ index, style }: any) => {
@@ -37,9 +34,6 @@ const renderItem = ({ index, style }: any) => {
       <Typography variant="h3" style={style} component="div"> {index} </Typography>
   );
 };
-
-const Icon1 = <img src={icon} width="32px" height="37px" alt="logo"/>
-const Icon2 = <img src={icon2} height="32px" alt="logo"/>
 
 const App = () => {
   const classes = useStyles();
@@ -49,7 +43,7 @@ const App = () => {
     <BenzinThemeProvider>
       <Header
         logo={{
-          icon: Icon1,
+          icon: Icon,
           title: 'BENZIN',
         }}
         contents={headerContents}
@@ -58,13 +52,15 @@ const App = () => {
       />
       <Window type="primary">
         <div className={classes.window}>
-          <ContentSection sectionName="Out of fuel? You've came to the right place!">
-            <p> Here is some text about BENZIN library. </p>
+          <ContentSection sectionName="Library preview">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
             <Button variant="contained" color="secondary">
-              Charge me up!
+              secondary
             </Button>
             <Button variant="contained" color="primary">
-              Learn more
+              primary
             </Button>
           </ContentSection>
         </div>
