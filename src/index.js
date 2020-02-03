@@ -10,8 +10,8 @@ import {
   ContentSection,
 } from './lib';
 
-import icon from './lib/assets/icon.png';
-import icon2 from './lib/assets/icon2.svg';
+import icon from './assets/icon.png';
+import icon2 from './assets/icon2.svg';
 import HomeIcon from '@material-ui/icons/Home';
 import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite';
 import ExploreIcon from '@material-ui/icons/Explore';
