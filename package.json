@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "start": "react-scripts start",
-    "test": "eslint .",
+    "test": "eslint . && tsc",
     "build": "rm -rf dist && tsc --project ts-compile-config.json",
     "deploy": "eslint src/lib && npm run build && npm publish --public"
   },
