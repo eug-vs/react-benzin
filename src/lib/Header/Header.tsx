@@ -11,7 +11,19 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 
-const useStyles = makeStyles(theme => ({
+interface PropTypes {
+  logo: {
+    icon: React.ReactNode;
+    title: string;
+  };
+  contents: {
+    [key: string]: React.ReactNode | null;
+  };
+  page: string;
+  setPage: (newPage: string) => void;
+}
+
+const useStyles = makeStyles((theme: any) => ({
   root: {
     background: theme.palette.background.elevation2,
     color: theme.palette.text.primary,
@@ -34,10 +46,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const Header = ({ logo, contents, page, setPage }) => {
+const Header: React.FC<PropTypes> = ({ logo, contents, page, setPage }) => {
   const classes = useStyles();
 
-  const handleChange = (event, newPage) => {
+  const handleChange = (event: React.ChangeEvent<{}>, newPage: string) => {
     setPage(newPage);
   };
 
@@ -49,10 +61,10 @@ const Header = ({ logo, contents, page, setPage }) => {
         {logo.title}
       </Typography>
       <Tabs onChange={handleChange} value={page}>
-        {contents && Object.keys(contents).map(item => (
+        {contents && Object.keys(contents).map((item: string) => (
           <Tab
             label={item}
-            icon={contents[item]}
+            icon={contents[item] as JSX.Element}
             value={item}
             className={classes.tab}
             key={item}
