@@ -1,6 +1,6 @@
 {
   "name": "react-benzin",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A powerful React Material components library.",
   "main": "dist/index.tsx",
   "module": "dist/index.tsx",
