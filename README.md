@@ -42,3 +42,12 @@ $ npm test
 ```
 **NOTE**: this command assures that `ESlint` does not throw any warnings and exits with a *non-zero status code* otherwise. That means `CircleCI` tests would fail *even if a single warning is present*. Therefore, you should always locally test your changes before publishing them.
 
+## Building
+We've decided to use `Typescript compiler` to transpile our code, since we think `Babel` is a bit of an overkill here.
+```bash
+$ npm run build
+``` 
+This command will generate `dist/` folder ready for distribution, which you of course can explore. Note that `tsc` creates type definitions (`.d.ts`) for every corresponding `.js` file. It's very useful because consumers also get access to them.
+
+## Deploying
+Deploying to `npm` is fully automated through **CircleCI**: simply tag a commit as a Release and it will do the job.
