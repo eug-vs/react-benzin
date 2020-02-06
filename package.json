@@ -9,9 +9,10 @@
   ],
   "scripts": {
     "start": "react-scripts start",
-    "test": "eslint . && tsc",
+    "lint": "eslint . --ext ts,tsx",
+    "test": "npm run lint && tsc",
     "build": "rm -rf dist && tsc --project ts-compile-config.json",
-    "deploy": "eslint src/lib && npm run build && npm publish --public"
+    "deploy": "npm run lint && npm run build && npm publish --public"
   },
   "license": "MIT",
   "dependencies": {
@@ -28,6 +29,8 @@
     "@types/react-dom": "^16.9.5",
     "@types/react-virtualized-auto-sizer": "^1.0.0",
     "@types/react-window": "^1.8.1",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
     "eslint": "^6.8.0",
     "eslint-config-react-app": "^5.1.0",
     "react-scripts": "^3.3.1",
