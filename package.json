@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "start": "react-scripts start",
-    "lint": "eslint . --ext ts,tsx",
+    "lint": "eslint . --ext ts,tsx --max-warnings 0",
     "test": "npm run lint && tsc",
     "build": "rm -rf dist && tsc --project ts-compile-config.json",
     "deploy": "npm run lint && npm run build && npm publish --public"
