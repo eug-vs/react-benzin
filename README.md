@@ -1,6 +1,6 @@
 <p align="center"><img src="src/assets/icon.svg" /></p>
 <h1 align="center"> BENZIN </h1>
- 
+
 [React](https://reactjs.org/) Material components library. It supplies you with cool pre-defined style, while assuring that your project will follow all [Material Design guidelines](https://material.io/).
 
 [![](https://img.shields.io/github/v/release/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/releases)
