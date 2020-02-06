@@ -1,12 +1,13 @@
-<p align="center"> <img src="src/assets/logo.png" /> </p>
+<p align="center"><img src="src/assets/icon.svg" /></p>
+<h1 align="center"> BENZIN </h1>
+ 
+[React](https://reactjs.org/) Material components library. It supplies you with cool pre-defined style, while assuring that your project will follow all [Material Design guidelines](https://material.io/).
 
 [![](https://img.shields.io/github/v/release/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/releases)
 [![](https://img.shields.io/circleci/build/github/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/commits/develop)
 [![](https://img.shields.io/david/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/network/dependencies)
 [![](https://img.shields.io/github/languages/code-size/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/releases)
 [![](https://img.shields.io/npm/l/react-benzin)](https://github.com/eug-vs/react-benzin/blob/develop/LICENSE.md)
-
-**BENZIN** is a powerful React Material components library. It supplies you with cool pre-defined style, while assuring that your project will follow all [Material Design guidelines](https://material.io/).
 
 
 # Getting started
