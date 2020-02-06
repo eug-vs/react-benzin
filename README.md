@@ -3,8 +3,8 @@
 
 [React](https://reactjs.org/) Material components library. It supplies you with cool pre-defined style, while assuring that your project will follow all [Material Design guidelines](https://material.io/).
 
-[![](https://img.shields.io/github/v/release/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/releases)
-[![](https://img.shields.io/circleci/build/github/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/commits/develop)
+[![](https://img.shields.io/npm/v/react-benzin?logo=npm)](https://github.com/eug-vs/react-benzin/releases)
+[![](https://img.shields.io/circleci/build/github/eug-vs/react-benzin?logo=circleci)](https://github.com/eug-vs/react-benzin/commits/develop)
 [![](https://img.shields.io/david/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/network/dependencies)
 [![](https://img.shields.io/github/languages/code-size/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/releases)
 [![](https://img.shields.io/npm/l/react-benzin)](https://github.com/eug-vs/react-benzin/blob/develop/LICENSE.md)
