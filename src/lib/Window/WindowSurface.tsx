@@ -11,7 +11,7 @@ interface PropTypes {
 }
 
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles(theme => ({
   surface: {
     position: 'absolute',
     display: 'flex',

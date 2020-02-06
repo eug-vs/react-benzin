@@ -13,6 +13,11 @@ import {
 
 import icon from './assets/icon.svg';
 
+interface RenderPropTypes {
+  index: number;
+  style: React.CSSProperties;
+}
+
 
 const useStyles = makeStyles(theme => ({
   window: {
@@ -29,13 +34,13 @@ const headerContents = {
   'another page': null,
 };
 
-const renderItem = ({ index, style }: any) => {
+const renderItem: React.FC<RenderPropTypes> = ({ index, style}) => {
   return (
       <Typography variant="h3" style={style} component="div"> {index} </Typography>
   );
 };
 
-const App = () => {
+const App: React.FC = () => {
   const classes = useStyles();
   const [page, setPage] = useState('home');
 

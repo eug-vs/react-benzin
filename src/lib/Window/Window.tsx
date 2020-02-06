@@ -12,7 +12,7 @@ interface PropTypes {
 }
 
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles(theme => ({
   header: {
     padding: theme.spacing(1, 0, 1, 2),
     background: theme.palette.background.elevation2,

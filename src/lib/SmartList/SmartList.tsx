@@ -5,7 +5,7 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 
 interface RenderPropTypes {
   index: number;
-  style: any;
+  style: React.CSSProperties;
 }
 
 interface PropTypes {
