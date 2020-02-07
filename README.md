@@ -20,6 +20,8 @@ $ npm install react-benzin
 
 **TIP:** *Create-React-App with Typescript* is your GO-TO in most of the cases. [Learn more.](https://create-react-app.dev/docs/adding-typescript/)
 
+![Preview screenshot](https://user-images.githubusercontent.com/51545008/73991116-46b04f00-495c-11ea-9733-865bcc6c8807.png)
+
 You can find a minimal usage example [here](src/index.tsx).
 
 ## Functionality
