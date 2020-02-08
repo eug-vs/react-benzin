@@ -1,6 +1,6 @@
 {
   "name": "react-benzin",
-  "version": "2.2.3",
+  "version": "3.0.0",
   "description": "A powerful React Material components library.",
   "main": "dist/index.js",
   "files": [
