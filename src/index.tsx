@@ -10,6 +10,7 @@ import {
   ContentSection,
   SmartList,
   Button,
+  Markdown,
 } from './lib';
 
 import icon from './assets/icon.svg';
@@ -26,6 +27,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+const data = "# Getting started\n## Installation \nGo and install it \n# Development\nMore info on dev";
 
 const Icon = <img src={icon} width="32px" height="37px" alt="logo"/>
 
@@ -89,19 +92,7 @@ const App: React.FC = () => {
               primary
             </Button>
           </ContentSection>
-          <ContentSection sectionName="Content section">
-            <p>
-              Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum leo, quis tempor ligula erat quis odio.  Nunc porta vulputate tellus.  Nunc rutrum turpis sed pede.  Sed bibendum.  Aliquam posuere.
-            </p>
-            <p>
-              <Link href="#">Link example</Link>
-            </p>
-          </ContentSection>
-          <ContentSection sectionName="Content section">
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan <Link href="#">nulla</Link>.  Nullam rutrum.  Nam vestibulum accumsan nisl.  Pellentesque dapibus suscipit ligula.
-            </p>
-          </ContentSection>
+          <Markdown data={data} />
         </div>
       </Window>
       <Window type="secondary" name="SmartList preview window">
