@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { makeStyles, Button, Link } from '@material-ui/core';
+import { makeStyles, Link } from '@material-ui/core';
 
 import {
   BenzinThemeProvider,
@@ -9,6 +9,7 @@ import {
   Window,
   ContentSection,
   SmartList,
+  Button,
 } from './lib';
 
 import icon from './assets/icon.svg';
@@ -48,13 +49,13 @@ const App: React.FC = () => {
             </p>
             {(index % 2 === 0)?
               (
-                <Button variant="contained" color="primary">
+                <Button color="primary">
                   primary
                 </Button>
               )
               :
               (
-                <Button variant="contained" color="secondary">
+                <Button color="secondary">
                   secondary
                 </Button>
               )
@@ -81,10 +82,10 @@ const App: React.FC = () => {
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque dapibus suscipit ligula.  Donec posuere augue in quam.  Etiam vel tortor sodales tellus ultricies commodo.  Suspendisse potenti.  Aenean in sem ac leo mollis blandit.  Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi.  <Link href="#">Phasellus lacus.</Link> Etiam laoreet quam sed arcu.  Phasellus at dui in ligula mollis ultricies.  Integer placerat tristique nisl.  Praesent augue.  Fusce commodo.
             </p>
-            <Button variant="contained" color="secondary">
+            <Button color="secondary">
               secondary
             </Button>
-            <Button variant="contained" color="primary">
+            <Button color="primary">
               primary
             </Button>
           </ContentSection>
