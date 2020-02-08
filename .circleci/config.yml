@@ -1,0 +1,73 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:12-stretch
+
+jobs:
+  checkout_and_test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: Install NPM dependencies
+          command: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Test syntax and perform type checking
+          command: npm test
+
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Deploy package
+          command: npm run deploy
+
+
+workflows:
+  version: 2
+
+  test:
+    jobs:
+      - checkout_and_test
+
+  deploy:
+    jobs:
+      - checkout_and_test:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - deploy:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - checkout_and_test
+

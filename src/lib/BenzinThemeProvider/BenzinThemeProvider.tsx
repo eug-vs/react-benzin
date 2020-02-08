@@ -4,6 +4,15 @@ import { CssBaseline } from '@material-ui/core';
 import 'typeface-roboto';
 
 
+declare module '@material-ui/core/styles/createPalette' {
+  interface TypeBackground {
+      elevation1: string;
+      elevation2: string;
+      elevation3: string;
+  }
+}
+
+
 const benzinTheme = createMuiTheme({
   palette: {
     type: 'dark',
@@ -28,7 +37,7 @@ const benzinTheme = createMuiTheme({
 });
 
 
-const BenzinThemeProvider = ({ children }) => (
+const BenzinThemeProvider: React.FC = ({ children }) => (
   <ThemeProvider theme={benzinTheme}>
     <CssBaseline />
     {children}

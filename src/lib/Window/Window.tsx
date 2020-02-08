@@ -2,7 +2,14 @@ import React from 'react';
 
 import { Typography, Divider, makeStyles } from '@material-ui/core';
 
-import WindowSurface from './WindowSurface/WindowSurface';
+import WindowSurface from './WindowSurface';
+import { SurfaceSize, SurfacePosition } from './types';
+
+
+interface PropTypes {
+  type: 'primary' | 'secondary' | 'mono';
+  name?: string;
+}
 
 
 const useStyles = makeStyles(theme => ({
@@ -13,14 +20,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const Window = ({ type, name, children }) => {
+const Window: React.FC<PropTypes> = ({ type, name, children }) => {
   const classes = useStyles();
 
-  const size = {
+  const size: SurfaceSize = {
     height: '85vh',
   };
 
-  const position = {
+  const position: SurfacePosition = {
     bottom: '3vh',
   };
 
@@ -50,6 +57,5 @@ const Window = ({ type, name, children }) => {
     </WindowSurface>
   );
 };
-
 
 export default Window;
