@@ -4,6 +4,7 @@
     "react-app",
     "plugin:@typescript-eslint/recommended"
   ],
+  "ignorePatterns": "dist/",
   "rules": {
     "jsx-quotes": ["error", "prefer-double"],
     "quotes": ["error", "single"]
