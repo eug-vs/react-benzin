@@ -1,4 +1,6 @@
 import React from 'react';
+import orange from '@material-ui/core/colors/orange';
+import purple from '@material-ui/core/colors/purple';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import 'typeface-roboto';
@@ -17,10 +19,10 @@ const benzinTheme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {
-      main: '#ffa726',
+      main: orange[400],
     },
     secondary: {
-      main: '#9c27b0',
+      main: purple[500],
     },
     background: {
       default: '#121212',
