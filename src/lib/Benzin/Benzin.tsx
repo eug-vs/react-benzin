@@ -39,7 +39,7 @@ const benzinTheme = createMuiTheme({
 });
 
 
-const BenzinThemeProvider: React.FC = ({ children }) => (
+const Benzin: React.FC = ({ children }) => (
   <ThemeProvider theme={benzinTheme}>
     <CssBaseline />
     {children}
@@ -47,5 +47,5 @@ const BenzinThemeProvider: React.FC = ({ children }) => (
 );
 
 
-export default BenzinThemeProvider;
+export default Benzin;
 
