@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { makeStyles, Link } from '@material-ui/core';
 
 import {
-  BenzinThemeProvider,
+  Benzin,
   Header,
   Window,
   ContentSection,
@@ -66,7 +66,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <BenzinThemeProvider>
+    <Benzin>
       <Header
         logo={{
           icon: Icon,
@@ -111,7 +111,7 @@ const App: React.FC = () => {
           renderItem={renderItem}
         />
       </Window>
-    </BenzinThemeProvider>
+    </Benzin>
   );
 };
 
