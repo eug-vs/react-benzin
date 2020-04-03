@@ -19,7 +19,7 @@ const header = (level: number): string => {
 }
 
 const Content: React.FC<RawLinesPropType> = ({ rawLines }) => {
-  const plainText = rawLines.join();
+  const plainText = rawLines.map(line => <p> {line} </p>);
   return <p> {plainText} </p>;
 }
 
