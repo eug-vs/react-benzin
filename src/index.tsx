@@ -90,7 +90,7 @@ const App: React.FC = () => {
               primary
             </Button>
           </ContentSection>
-          <Markdown url='https://raw.githubusercontent.com/eug-vs/react-benzin/develop/README.md' />
+          <Markdown url="https://raw.githubusercontent.com/eug-vs/react-benzin/develop/README.md" />
         </div>
       </Window>
       <Window type="secondary" name="SmartList preview window">

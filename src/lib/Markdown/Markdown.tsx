@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 import ContentSection from '../ContentSection/ContentSection';
@@ -30,7 +30,7 @@ const Level: React.FC<RawLinesPropType> = ({ rawLines, level = 0 }) => {
   const rawContent = (contentSize > 0) ? rawLines.slice(1, contentSize) : rawLines.slice(1);
   const rawChildren = rawLines.slice(contentSize);
 
-  const childrenLineGroups = rawChildren.reduce((acc: any[], cur: string) => {
+  const childrenLineGroups = rawChildren.reduce((acc: string[][], cur: string) => {
     if (cur.match(header(level + 1))) acc.push([]);
     if (acc.length) acc[acc.length - 1].push(cur);
     return acc;
