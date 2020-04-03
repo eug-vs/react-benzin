@@ -28,8 +28,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const data = "# Getting started\n## Installation \nGo and install it \n# Development\nMore info on dev";
-
 const Icon = <img src={icon} width="32px" height="37px" alt="logo"/>
 
 const headerContents = {
@@ -92,7 +90,7 @@ const App: React.FC = () => {
               primary
             </Button>
           </ContentSection>
-          <Markdown data={data} />
+          <Markdown url='https://raw.githubusercontent.com/eug-vs/react-benzin/develop/README.md' />
         </div>
       </Window>
       <Window type="secondary" name="SmartList preview window">

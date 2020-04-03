@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import ContentSection from '../ContentSection/ContentSection';
 
 
 interface PropTypes {
-  data: string;
+  data?: string;
+  url?: string;
 }
 
 interface RawLinesPropType {
@@ -14,7 +16,7 @@ interface RawLinesPropType {
 
 const header = (level: number): string => {
   return `^#{${level}} .*$`;
-};
+}
 
 const Content: React.FC<RawLinesPropType> = ({ rawLines }) => {
   const plainText = rawLines.join();
@@ -47,9 +49,10 @@ const Level: React.FC<RawLinesPropType> = ({ rawLines, level = 0 }) => {
   );
 }
 
-const Markdown: React.FC<PropTypes> = ({ data }) => {
-  const rawLines = data.split('\n');
-  return <Level rawLines={rawLines} />
+const Markdown: React.FC<PropTypes> = ({ data, url }) => {
+  const [markdown, setMarkdown] = useState<string>(data || '');
+  if (url) axios.get(url).then(response => setMarkdown(response.data));
+  return <Level rawLines={markdown.split('\n')} />
 };
 
 
