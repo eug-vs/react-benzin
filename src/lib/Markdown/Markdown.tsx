@@ -18,9 +18,35 @@ const header = (level: number): string => {
   return `^#{${level}} .*$`;
 }
 
+const CodeBlock: React.FC<{ rawLines: String[]}> = ({ rawLines }) => {
+  return (
+    <p style={{background: '#444444'}}>
+      {rawLines.map(line => <> {line} <br/> </>)}
+    </p>
+  );
+}
+
+
 const Content: React.FC<RawLinesPropType> = ({ rawLines }) => {
-  const plainText = rawLines.map(line => <p> {line} </p>);
-  return <p> {plainText} </p>;
+  if (!rawLines.length) return <></>;
+  const line = rawLines[0];
+  const otherLines = rawLines.slice(1);
+  if (line.slice(0, 3) === '```') {
+    const closeIndex = otherLines.findIndex(line => line.slice(0, 3) === '```');
+    console.log({ line, otherLines, closeIndex });
+    return (
+      <>
+        <CodeBlock rawLines={otherLines.slice(0, closeIndex)} />
+        <Content rawLines={otherLines.slice(closeIndex + 1)} />
+      </>
+    )
+  }
+  return (
+    <>
+      <p> {line} </p>
+      <Content rawLines={rawLines.slice(1)} />
+    </>
+  )
 }
 
 const Level: React.FC<RawLinesPropType> = ({ rawLines, level = 0 }) => {
