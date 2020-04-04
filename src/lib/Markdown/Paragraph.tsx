@@ -4,62 +4,63 @@ interface PropTypes {
   data: string;
 }
 
-interface Closures {
-  [key: string]: string;
+type RuleName = 'bold' | 'italic' | 'inlineCode' | 'strikeThrough';
+
+interface RuleProperties {
+  enclosure: string;
+  style: React.CSSProperties;
+  pattern?: RegExp;
 }
 
-interface Patterns {
-  [key: string]: RegExp;
-}
-
-interface Styles {
-  [key: string]: React.CSSProperties;
-}
-
-
-const captureInside = (closure: string): any => {
-  return new RegExp(closure + '([^' + closure + ']+)' + closure);
-}
-const capture = (closure: string): any => {
-  return new RegExp('(' + closure + '[^' + closure + ']+' + closure + ')');
-}
-
-const closures: Closures = {
-  inlineCode: '`',
-  bold: '\\*\\*',
+const rules: Record<RuleName, RuleProperties>= {  // Order matters - lowest property has highest priority
+  strikeThrough: {
+    enclosure: '~~',
+    style: { textDecoration: 'line-through' },
+  },
+  inlineCode: {
+    enclosure: '`',
+    style: { background: '#444444', padding: '4px' },
+  },
+  italic: {
+    enclosure: '\\*',
+    style: { fontStyle: 'italic' },
+  },
+  bold: {
+    enclosure: '\\*\\*',
+    style: { fontWeight: 'bold' },
+  },
 };
 
-const styles: Styles = {
-  inlineCode: { background: '#444444', padding: '4px' },
-  bold: { fontWeight: 'bold' },
-};
-const patterns: Patterns = {};
+const ruleNames = Object.keys(rules) as RuleName[];
 
+const capture = (enclosure: string): RegExp => {
+  return new RegExp(enclosure + '([^' + enclosure + ']+)' + enclosure);
+}
+const captureSplit = (enclosure: string): string => {
+  return '(' + enclosure + '[^' + enclosure + ']+' + enclosure + ')';
+}
 
-Object.keys(closures).forEach((key: string): void => {
-  patterns[key] = capture(closures[key]);
+const ruleSplitPatterns: string[] = [];
+ruleNames.forEach(name => {
+  rules[name].pattern = capture(rules[name].enclosure);
+  ruleSplitPatterns.push(captureSplit(rules[name].enclosure));
 });
 
-const matcher = new RegExp(Object.values(patterns).map(regex => regex.source).join('|'));
-
-Object.keys(closures).forEach((key: string): void => {
-  patterns[key] = captureInside(closures[key]);
-});
-
+const splitter = new RegExp(ruleSplitPatterns.join('|'));
 
 const SyntaxSpan: React.FC<PropTypes> = ({ data }) => {
   if (!data) return null;
-  for (let key in styles) {
-    const match = data.match(patterns[key]);
-    if (match) return <span style={styles[key]}>{match[1]}</span>;
-  };
-  return <>{data}</>;
+  let span = <>{data}</>;
+  ruleNames.forEach(name => {
+    const rule = rules[name];
+    const match = data.match(rule.pattern || '');
+    if (match) span = <span style={rule.style}>{match[1]}</span>;
+  });
+  return span;
 }
 
 const Paragraph: React.FC<PropTypes> = ({ data }) => {
-  let result;
-  result = data.split(matcher);
-  result = result.map(span => <SyntaxSpan data={span} />);
+  const result = data.split(splitter).map(span => <SyntaxSpan data={span} />);
   return <p> {result} </p>;
 }
 
