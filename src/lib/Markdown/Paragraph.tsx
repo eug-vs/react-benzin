@@ -1,23 +1,25 @@
 import React from 'react';
+import { Link } from '@material-ui/core';
 
 interface PropTypes {
   data: string;
 }
 
-type RuleName = 'bold' | 'italic' | 'inlineCode' | 'strikeThrough';
+type InlineRuleName = 'bold' | 'italic' | 'code' | 'strikeThrough';
 
-interface RuleProperties {
+interface InlineRuleProperties {
   enclosure: string;
   style: React.CSSProperties;
   pattern?: RegExp;
 }
 
-const rules: Record<RuleName, RuleProperties>= {  // Order matters - lowest property has highest priority
+const inlineRules: Record<InlineRuleName, InlineRuleProperties>= {
+  // Order matters - lowest property has highest priority
   strikeThrough: {
     enclosure: '~~',
     style: { textDecoration: 'line-through' },
   },
-  inlineCode: {
+  code: {
     enclosure: '`',
     style: { background: '#444444', padding: '4px' },
   },
@@ -31,28 +33,41 @@ const rules: Record<RuleName, RuleProperties>= {  // Order matters - lowest prop
   },
 };
 
-const ruleNames = Object.keys(rules) as RuleName[];
+const inlineRuleNames = Object.keys(inlineRules) as InlineRuleName[];
 
-const capture = (enclosure: string): RegExp => {
+const captureInline = (enclosure: string): RegExp => {
   return new RegExp(enclosure + '([^' + enclosure + ']+)' + enclosure);
 }
-const captureSplit = (enclosure: string): string => {
+const captureInlineSplit = (enclosure: string): string => {
   return '(' + enclosure + '[^' + enclosure + ']+' + enclosure + ')';
 }
+const concealRegex = /!?\[(.+?)\]\((.+?)\)/;
+const concealRegexSplit = /(!?\[.+?\]\(.+?\))/g;
+const rawLinkRegex = /((?:(?:[A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)(?:(?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/;
 
-const ruleSplitPatterns: string[] = [];
-ruleNames.forEach(name => {
-  rules[name].pattern = capture(rules[name].enclosure);
-  ruleSplitPatterns.push(captureSplit(rules[name].enclosure));
+const ruleSplitPatterns: string[] = [concealRegexSplit.source, rawLinkRegex.source];
+inlineRuleNames.forEach(name => {
+  const enclosure = inlineRules[name].enclosure;
+  inlineRules[name].pattern = captureInline(enclosure);
+  ruleSplitPatterns.push(captureInlineSplit(enclosure));
 });
 
 const splitter = new RegExp(ruleSplitPatterns.join('|'));
 
 const SyntaxSpan: React.FC<PropTypes> = ({ data }) => {
   if (!data) return null;
+
+  const conceal = concealRegex.exec(data);
+  if (conceal) {
+    if (data[0] === '!') return <img src={conceal[2]} alt={conceal[1]} style={{ maxWidth: '100%', maxHeight: '100%' }} />;
+    return <Link href={conceal[2]}>{conceal[1]}</Link>;
+  }
+
+  if (data.match(rawLinkRegex)) return <Link href={data}>{data}</Link>;
+
   let span = <>{data}</>;
-  ruleNames.forEach(name => {
-    const rule = rules[name];
+  inlineRuleNames.forEach(name => {
+    const rule = inlineRules[name];
     const match = data.match(rule.pattern || '');
     if (match) span = <span style={rule.style}>{match[1]}</span>;
   });
@@ -65,4 +80,5 @@ const Paragraph: React.FC<PropTypes> = ({ data }) => {
 }
 
 export default Paragraph;
+
 
