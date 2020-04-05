@@ -7,14 +7,19 @@ interface PropTypes extends ParserPropTypes {
   level?: number;
 }
 
-const matchHeaderLevel = (line: string, level: number): boolean => {
-  return line.match(`^#{${level}} .*$`) !== null;
+const getHeaderLevel = (header: string): number => {
+  if (!header) return 0;
+  let level = 0;
+  while(header[level] === '#') level++;
+  return level;
 }
 
-const ChildrenSections: React.FC<PropTypes> = ({ rawLines, level = 1 }) => {
+const ChildrenSections: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
   const childrenSectionLines = rawLines.reduce((sections: string[][], line: string) => {
-    if (matchHeaderLevel(line, level)) sections.push([]);
-    if (sections.length) sections[sections.length - 1].push(line);
+    if (line) {
+      if (getHeaderLevel(line) === level) sections.push([]);
+      if (sections.length) sections[sections.length - 1].push(line);
+    }
     return sections;
   }, []);
   const children = childrenSectionLines.map(sectionLines => <Section rawLines={sectionLines} level={level}/>);
@@ -22,21 +27,17 @@ const ChildrenSections: React.FC<PropTypes> = ({ rawLines, level = 1 }) => {
 }
 
 const Section: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
-  if (!level) {
-    const beforeMarkdown = rawLines.splice(0, rawLines.findIndex(line => line.match(/^#.+$/g)));
-    console.log(`This content was found in original .md file but will not be shown: ${beforeMarkdown.join()}`);
-    while(rawLines[0][level + 1] === '#') level++;
-    return <ChildrenSections rawLines={rawLines} level={level + 1}/>;
-  }
+  const deeperLevelIndex = rawLines.findIndex(line => line.match(`^#{${level + 1},} .*$`));
+  const rawContent = rawLines.splice(0, (deeperLevelIndex < 0) ? rawLines.length : deeperLevelIndex);
 
-  const sectionName = rawLines.splice(0, 1)[0].slice(level).trim();
-  const contentSize = rawLines.findIndex(line => matchHeaderLevel(line, level + 1));
-  const rawContent = rawLines.splice(0, (contentSize < 0) ? rawLines.length : contentSize);
+  if (!level) return <ChildrenSections rawLines={rawLines} level={getHeaderLevel(rawLines[0])}/>;
 
+  const sectionName = rawContent.splice(0, 1)[0].slice(level).trim();
+  const deeperLevel = getHeaderLevel(rawLines[0]);
   return (
     <ContentSection sectionName={sectionName} level={level}>
       <Content rawLines={rawContent} />
-      <ChildrenSections rawLines={rawLines} level={level + 1} />
+      <ChildrenSections rawLines={rawLines} level={deeperLevel} />
     </ContentSection>
   );
 }
