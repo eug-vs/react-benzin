@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, makeStyles } from '@material-ui/core';
 
-// @ts-ignore-next-line;
 import { lib as emojiLib } from 'emojilib';
 import { InlineParserPropTypes } from './types';
 
