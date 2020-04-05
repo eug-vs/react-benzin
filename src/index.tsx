@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { makeStyles, Link } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 import {
   BenzinThemeProvider,
   Header,
   Window,
-  ContentSection,
-  SmartList,
-  Button,
   Markdown,
 } from './lib';
 
@@ -32,8 +29,16 @@ const Icon = <img src={icon} width="32px" height="37px" alt="logo"/>
 
 const headerContents = {
   home: null,
-  page: null,
-  'another page': null,
+  space: null,
+  'emoji': null,
+  'material-ui': null,
+};
+
+const pageMap: Record<string, string> = {
+  home: "https://raw.githubusercontent.com/eug-vs/react-benzin/develop/README.md",
+  space: "https://raw.githubusercontent.com/eug-vs/space/master/docs/environment.md",
+  emoji: "https://raw.githubusercontent.com/muan/emoji/gh-pages/README.md",
+  'material-ui': "https://raw.githubusercontent.com/mui-org/material-ui/master/README.md",
 };
 
 
@@ -41,30 +46,24 @@ const App: React.FC = () => {
   const classes = useStyles();
   const [page, setPage] = useState('home');
 
-  const renderItem: React.FC<RenderPropTypes> = ({ index, style}) => {
-    return (
-        <div style={style} className={classes.window}>
-          <ContentSection sectionName={`Item ${index+1}`}>
-            <p>
-              Fusce commodo.  Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.  Nullam libero mauris, consequat quis, varius et, dictum id, arcu.  Mauris mollis tincidunt felis.
-            </p>
-            {(index % 2 === 0)?
-              (
-                <Button color="primary">
-                  primary
-                </Button>
-              )
-              :
-              (
-                <Button color="secondary">
-                  secondary
-                </Button>
-              )
-            }
-          </ContentSection>
-        </div>
-    );
-  };
+  const url = pageMap[page];
+  const filename = url.slice(url.lastIndexOf('/') + 1);
+  const metadata = [
+    `## Markdown\n [Markdown file](${url}) that you can see on the left was parsed and processed by **BENZIN**!`,
+    'Switch between tabs on the header to explore other markdown templates.',
+    'Currently **only core features** of markdown function.',
+    'Templates on the left are being loaded from the internet, though this pane is generated from plaintext.',
+    '## How do I use this feature?',
+    '```',
+    'import Markdown from \'react-benzin\';',
+    'const data = \'# Header\\nHello, *world!* \';',
+    'ReactDOM.render(<Markdown data={data}/>, document.getElementById(\'root\'));',
+    '```',
+    'Yep! **Or even simpler**:',
+    '```',
+    'ReactDOM.render(<Markdown url={url}/>, document.getElementById(\'root\'));',
+    '```',
+  ].join('\n');
 
   return (
     <BenzinThemeProvider>
@@ -79,26 +78,13 @@ const App: React.FC = () => {
       />
       <Window type="primary">
         <div className={classes.window}>
-          <ContentSection sectionName="Library preview">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque dapibus suscipit ligula.  Donec posuere augue in quam.  Etiam vel tortor sodales tellus ultricies commodo.  Suspendisse potenti.  Aenean in sem ac leo mollis blandit.  Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi.  <Link href="#">Phasellus lacus.</Link> Etiam laoreet quam sed arcu.  Phasellus at dui in ligula mollis ultricies.  Integer placerat tristique nisl.  Praesent augue.  Fusce commodo.
-            </p>
-            <Button color="secondary">
-              secondary
-            </Button>
-            <Button color="primary">
-              primary
-            </Button>
-          </ContentSection>
-          <Markdown url="https://raw.githubusercontent.com/eug-vs/react-benzin/develop/README.md" />
+          <Markdown url={url} />
         </div>
       </Window>
-      <Window type="secondary" name="SmartList preview window">
-        <SmartList
-          itemSize={270}
-          itemCount={100}
-          renderItem={renderItem}
-        />
+      <Window type="secondary" name="Feature preview">
+        <div className={classes.window}>
+          <Markdown data={metadata} />
+        </div>
       </Window>
     </BenzinThemeProvider>
   );
