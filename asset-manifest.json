@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.js": "/static/js/main.52fa82f3.chunk.js",
-    "main.js.map": "/static/js/main.52fa82f3.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.01464162.js",
-    "runtime-main.js.map": "/static/js/runtime-main.01464162.js.map",
-    "static/css/2.47271137.chunk.css": "/static/css/2.47271137.chunk.css",
-    "static/js/2.093584ac.chunk.js": "/static/js/2.093584ac.chunk.js",
-    "static/js/2.093584ac.chunk.js.map": "/static/js/2.093584ac.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.1f270ddeceb206c582e0553b4960d28b.js": "/precache-manifest.1f270ddeceb206c582e0553b4960d28b.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.47271137.chunk.css.map": "/static/css/2.47271137.chunk.css.map",
-    "static/js/2.093584ac.chunk.js.LICENSE.txt": "/static/js/2.093584ac.chunk.js.LICENSE.txt",
-    "static/media/icon.svg": "/static/media/icon.8908a388.svg",
-    "static/media/index.css": "/static/media/roboto-latin-900italic.ebf6d164.woff2"
+    "main.js": "/react-benzin/static/js/main.52fa82f3.chunk.js",
+    "main.js.map": "/react-benzin/static/js/main.52fa82f3.chunk.js.map",
+    "runtime-main.js": "/react-benzin/static/js/runtime-main.1cf4080f.js",
+    "runtime-main.js.map": "/react-benzin/static/js/runtime-main.1cf4080f.js.map",
+    "static/css/2.4391b94e.chunk.css": "/react-benzin/static/css/2.4391b94e.chunk.css",
+    "static/js/2.093584ac.chunk.js": "/react-benzin/static/js/2.093584ac.chunk.js",
+    "static/js/2.093584ac.chunk.js.map": "/react-benzin/static/js/2.093584ac.chunk.js.map",
+    "index.html": "/react-benzin/index.html",
+    "precache-manifest.a8afba46bff3c14aff62a88b6fa3278a.js": "/react-benzin/precache-manifest.a8afba46bff3c14aff62a88b6fa3278a.js",
+    "service-worker.js": "/react-benzin/service-worker.js",
+    "static/css/2.4391b94e.chunk.css.map": "/react-benzin/static/css/2.4391b94e.chunk.css.map",
+    "static/js/2.093584ac.chunk.js.LICENSE.txt": "/react-benzin/static/js/2.093584ac.chunk.js.LICENSE.txt",
+    "static/media/icon.svg": "/react-benzin/static/media/icon.8908a388.svg",
+    "static/media/index.css": "/react-benzin/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.01464162.js",
-    "static/css/2.47271137.chunk.css",
+    "static/js/runtime-main.1cf4080f.js",
+    "static/css/2.4391b94e.chunk.css",
     "static/js/2.093584ac.chunk.js",
     "static/js/main.52fa82f3.chunk.js"
   ]
