@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from '@material-ui/core';
-import axios from 'axios';
+import { Link, makeStyles } from '@material-ui/core';
 
+// @ts-ignore-next-line;
+import { lib as emojiLib } from 'emojilib';
 import { InlineParserPropTypes } from './types';
 
 interface RegexPair {
@@ -38,17 +39,29 @@ const regex: Record<string, RegexPair> = {
 const splitter = new RegExp(Object.values(regex).map(pair => pair.global.source).join('|'));
 
 const emojiList: Emoji[] = [];
-axios.get('https://unpkg.com/emojilib@2.4.0/emojis.json').then(response => {
-  Object.keys(response.data).forEach(name => emojiList.push({ name, char: response.data[name].char }));
-});
+Object.keys(emojiLib).forEach(name => emojiList.push({ name, char: emojiLib[name].char }));
+console.log({emojiList})
 
+const useStyles = makeStyles(theme => ({
+  code: {
+    background: theme.palette.background.default,
+    borderRadius: theme.spacing(.5),
+    padding: theme.spacing(.5),
+    fontFamily: 'Monospace',
+  },
+  image: {
+    maxWidth: '100%',
+    maxHeight: '100%'
+  },
+}));
 
 const InlineSyntax: React.FC<InlineParserPropTypes> = ({ line }) => {
+  const classes = useStyles();
   if (!line) return null;
 
   const matchConceal = regex.conceal.local.exec(line);
   if (matchConceal) {
-    if (line[0] === '!') return <img src={matchConceal[2]} alt={matchConceal[1]} style={{ maxWidth: '100%', maxHeight: '100%' }} />;
+    if (line[0] === '!') return <img src={matchConceal[2]} alt={matchConceal[1]} className={classes.image} />;
     return <Link href={matchConceal[2]}>{matchConceal[1]}</Link>;
   }
 
@@ -59,7 +72,7 @@ const InlineSyntax: React.FC<InlineParserPropTypes> = ({ line }) => {
   }
 
   const matchCode = line.match(regex.code.local);
-  if (matchCode) return <span style={{ background: 'rgba(255, 255, 255, .1)' }}>{matchCode[1]}</span>;
+  if (matchCode) return <span className={classes.code}>{matchCode[1]}</span>;
 
   const matchBold = line.match(regex.bold.local);
   if (matchBold) return <b>{matchBold[1]}</b>;

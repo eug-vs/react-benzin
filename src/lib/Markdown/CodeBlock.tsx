@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.background.default,
     padding: theme.spacing(2),
     overflowX: 'auto',
+    fontFamily: 'Monospace',
   },
 }));
 
