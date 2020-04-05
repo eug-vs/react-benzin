@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link } from '@material-ui/core';
+import axios from 'axios';
 
 interface PropTypes {
   data: string;
 }
 
-type InlineRuleName = 'bold' | 'italic' | 'code' | 'strikeThrough';
+interface Emoji {
+  name: string;
+  char: string;
+}
+
+type InlineRuleName = 'bold' | 'italic' | 'code' | 'strikeThrough' | 'emoji';
 
 interface InlineRuleProperties {
   enclosure: string;
@@ -31,6 +37,10 @@ const inlineRules: Record<InlineRuleName, InlineRuleProperties>= {
     enclosure: '\\*\\*',
     style: { fontWeight: 'bold' },
   },
+  emoji: {
+    enclosure: ':',
+    style: {},
+  }
 };
 
 const inlineRuleNames = Object.keys(inlineRules) as InlineRuleName[];
@@ -54,6 +64,11 @@ inlineRuleNames.forEach(name => {
 
 const splitter = new RegExp(ruleSplitPatterns.join('|'));
 
+const emojiList: Emoji[] = [];
+axios.get('https://unpkg.com/emojilib@2.4.0/emojis.json').then(response => {
+  Object.keys(response.data).forEach(name => emojiList.push({ name, char: response.data[name].char }));
+});
+
 const SyntaxSpan: React.FC<PropTypes> = ({ data }) => {
   if (!data) return null;
 
@@ -69,7 +84,12 @@ const SyntaxSpan: React.FC<PropTypes> = ({ data }) => {
   inlineRuleNames.forEach(name => {
     const rule = inlineRules[name];
     const match = data.match(rule.pattern || '');
-    if (match) span = <span style={rule.style}>{match[1]}</span>;
+    if (match) {
+      if (name === 'emoji') {
+        const emoji = emojiList.find(emoji => emoji.name === match[1]);
+        span = <span>{emoji ? emoji.char : ''}</span>;
+      } else span = <span style={rule.style}>{match[1]}</span>;
+    }
   });
   return span;
 }
