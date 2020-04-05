@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { makeStyles, Link } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 import {
   Benzin,
   Header,
   Window,
-  ContentSection,
-  SmartList,
-  Button,
+  Markdown,
 } from './lib';
 
 import icon from './assets/icon.svg';
@@ -31,8 +29,18 @@ const Icon = <img src={icon} width="32px" height="37px" alt="logo"/>
 
 const headerContents = {
   home: null,
-  page: null,
-  'another page': null,
+  space: null,
+  'spacevim': null,
+  'emoji': null,
+  'material-ui': null,
+};
+
+const pageMap: Record<string, string> = {
+  home: 'https://raw.githubusercontent.com/eug-vs/react-benzin/develop/README.md',
+  space: 'https://raw.githubusercontent.com/eug-vs/space/master/docs/environment.md',
+  'spacevim': 'https://raw.githubusercontent.com/spacevim/spacevim/master/README.md',
+  emoji: 'https://raw.githubusercontent.com/muan/emoji/gh-pages/README.md',
+  'material-ui': 'https://raw.githubusercontent.com/mui-org/material-ui/master/README.md',
 };
 
 
@@ -40,30 +48,20 @@ const App: React.FC = () => {
   const classes = useStyles();
   const [page, setPage] = useState('home');
 
-  const renderItem: React.FC<RenderPropTypes> = ({ index, style}) => {
-    return (
-        <div style={style} className={classes.window}>
-          <ContentSection sectionName={`Item ${index+1}`}>
-            <p>
-              Fusce commodo.  Vestibulum convallis, lorem a tempus semper, dui dui euismod elit, vitae placerat urna tortor vitae lacus.  Nullam libero mauris, consequat quis, varius et, dictum id, arcu.  Mauris mollis tincidunt felis.
-            </p>
-            {(index % 2 === 0)?
-              (
-                <Button color="primary">
-                  primary
-                </Button>
-              )
-              :
-              (
-                <Button color="secondary">
-                  secondary
-                </Button>
-              )
-            }
-          </ContentSection>
-        </div>
-    );
-  };
+  const url = pageMap[page];
+  const fileName = url.slice(url.lastIndexOf('/') + 1);
+  const metadata = [
+    `## Markdown\n [Markdown file](${url}) *(...${fileName})* that you can see on the left was parsed and processed by **BENZIN**! :rocket:`,
+    'Switch between tabs on the header to explore other markdown templates. :recycle: ',
+    'Currently **only core features** of markdown function.',
+    'Templates on the left are being loaded from the [GitHub](https://github.com), though this pane is generated from plaintext. :pen:',
+    '## How do I use this feature?',
+    '```',
+    'import Markdown from \'react-benzin\';',
+    'const data = \'# Header\\nHello, *world!*\';',
+    'ReactDOM.render(<Markdown data={data}/>, document.getElementById(\'root\'));',
+    '```',
+  ].join('\n');
 
   return (
     <Benzin>
@@ -78,38 +76,13 @@ const App: React.FC = () => {
       />
       <Window type="primary">
         <div className={classes.window}>
-          <ContentSection sectionName="Library preview">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque dapibus suscipit ligula.  Donec posuere augue in quam.  Etiam vel tortor sodales tellus ultricies commodo.  Suspendisse potenti.  Aenean in sem ac leo mollis blandit.  Donec neque quam, dignissim in, mollis nec, sagittis eu, wisi.  <Link href="#">Phasellus lacus.</Link> Etiam laoreet quam sed arcu.  Phasellus at dui in ligula mollis ultricies.  Integer placerat tristique nisl.  Praesent augue.  Fusce commodo.
-            </p>
-            <Button color="secondary">
-              secondary
-            </Button>
-            <Button color="primary">
-              primary
-            </Button>
-          </ContentSection>
-          <ContentSection sectionName="Content section">
-            <p>
-              Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum leo, quis tempor ligula erat quis odio.  Nunc porta vulputate tellus.  Nunc rutrum turpis sed pede.  Sed bibendum.  Aliquam posuere.
-            </p>
-            <p>
-              <Link href="#">Link example</Link>
-            </p>
-          </ContentSection>
-          <ContentSection sectionName="Content section">
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan <Link href="#">nulla</Link>.  Nullam rutrum.  Nam vestibulum accumsan nisl.  Pellentesque dapibus suscipit ligula.
-            </p>
-          </ContentSection>
+          <Markdown url={url} />
         </div>
       </Window>
-      <Window type="secondary" name="SmartList preview window">
-        <SmartList
-          itemSize={270}
-          itemCount={100}
-          renderItem={renderItem}
-        />
+      <Window type="secondary" name="Feature preview">
+        <div className={classes.window}>
+          <Markdown data={metadata} />
+        </div>
       </Window>
     </Benzin>
   );
