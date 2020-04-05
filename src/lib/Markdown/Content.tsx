@@ -20,7 +20,7 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
     const codeBlockLines = rawLines.splice(0, closeIndex + 1).slice(0, closeIndex);
     result = <CodeBlock rawLines={codeBlockLines} />
   } else {
-    result = <Paragraph data={line} />
+    result = <Paragraph line={line} />
   }
 
   return (

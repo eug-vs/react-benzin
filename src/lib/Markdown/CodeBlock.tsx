@@ -3,7 +3,7 @@ import { ParserPropTypes } from './types';
 
 const CodeBlock: React.FC<ParserPropTypes> = ({ rawLines }) => {
   return (
-    <p style={{background: '#444444', padding: '8px' }}>
+    <p style={{background: 'rgba(255, 255, 255, .1)', padding: '8px' }}>
       {rawLines.map(line => <> {line} <br/> </>)}
     </p>
   );
