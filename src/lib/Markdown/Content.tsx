@@ -24,7 +24,7 @@ const denotesClosingHtml= (line: string, tag: string): boolean => {
   return line.match(regex) !== null;
 }
 
-const denotesSelfClosingHtml = (line: string): any => {
+const denotesSelfClosingHtml = (line: string): string[] | null => {
   const regex = /(<[^/\s]*[^<]*\/>)/g;
   return line.match(regex);
 }
@@ -44,14 +44,14 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
     const dottedListLines = rawLines.splice(0, closeIndex).slice(0, closeIndex);
     dottedListLines.unshift(line);
     buffer = <ul>{dottedListLines.map(li => <li><Text line={li.slice(2)} /></li>)}</ul>;
-  } else if (denotesOpenHtml(line)) {
-    const tag = denotesOpenHtml(line);
+  } else if ((buffer = denotesOpenHtml(line))) {
+    const tag = buffer;
     const closeIndex = rawLines.findIndex(line => denotesClosingHtml(line, tag));
     const htmlLines = rawLines.splice(0, closeIndex + 1).slice(0, closeIndex);
     htmlLines.unshift(line);
     buffer = <div dangerouslySetInnerHTML={{ __html: htmlLines.join('\n') }}></div>;
-  } else if (denotesSelfClosingHtml(line) !== null) {
-    const match = denotesSelfClosingHtml(line)[0];
+  } else if ((buffer = denotesSelfClosingHtml(line)) !== null) {
+    const match = buffer[0];
     const [before, after] = line.split(match);
     console.log({ line, match, before, after});
     buffer = (
