@@ -1,7 +1,8 @@
 {
   "name": "react-benzin",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A powerful React Material components library.",
+  "homepage": "https://eug-vs.github.io/react-benzin",
   "main": "dist/index.js",
   "files": [
     "dist",
@@ -35,6 +36,7 @@
     "@typescript-eslint/parser": "^2.19.0",
     "eslint": "^6.8.0",
     "eslint-config-react-app": "^5.1.0",
+    "gh-pages": "^2.2.0",
     "react-scripts": "^3.3.1",
     "typescript": "^3.7.5"
   },
