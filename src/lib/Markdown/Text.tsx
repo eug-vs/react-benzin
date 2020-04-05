@@ -1,9 +1,12 @@
 import React from 'react';
-import { InlineParserPropTypes } from './types';
-import InlineSyntax, { splitter } from './InlineSyntax';
+import SyntacticSpan, { splitter } from './SyntacticSpan';
 
-const Text: React.FC<InlineParserPropTypes> = ({ line }) => {
-  return <>{line.split(splitter).map(span => <InlineSyntax line={span} />)}</>;
+interface PropTypes {
+  line: string;
+}
+
+const Text: React.FC<PropTypes> = ({ line }) => {
+  return <>{line.split(splitter).map(span => <SyntacticSpan span={span} />)}</>;
 }
 
 export default Text;

@@ -2,7 +2,10 @@ import React from 'react';
 import { Link, makeStyles } from '@material-ui/core';
 
 import { lib as emojiLib } from 'emojilib';
-import { InlineParserPropTypes } from './types';
+
+interface PropTypes {
+  span: string;
+}
 
 interface RegexPair {
   global: RegExp;
@@ -54,40 +57,40 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const InlineSyntax: React.FC<InlineParserPropTypes> = ({ line }) => {
+const SyntacticSpan: React.FC<PropTypes> = ({ span }) => {
   const classes = useStyles();
-  if (!line) return null;
+  if (!span) return null;
 
-  const matchConceal = regex.conceal.local.exec(line);
+  const matchConceal = regex.conceal.local.exec(span);
   if (matchConceal) {
-    if (line[0] === '!') return <img src={matchConceal[2]} alt={matchConceal[1]} className={classes.image} />;
+    if (span[0] === '!') return <img src={matchConceal[2]} alt={matchConceal[1]} className={classes.image} />;
     return <Link href={matchConceal[2]}>{matchConceal[1]}</Link>;
   }
 
-  const matchEmoji = line.match(regex.emoji.local);
+  const matchEmoji = span.match(regex.emoji.local);
   if (matchEmoji) {
     const emoji = emojiList.find(emoji => emoji.name === matchEmoji[1]);
-    return <span>{emoji ? emoji.char : line}</span>;
+    return <span>{emoji ? emoji.char : span}</span>;
   }
 
-  const matchCode = line.match(regex.code.local);
+  const matchCode = span.match(regex.code.local);
   if (matchCode) return <span className={classes.code}>{matchCode[1]}</span>;
 
-  const matchBold = line.match(regex.bold.local);
+  const matchBold = span.match(regex.bold.local);
   if (matchBold) return <b>{matchBold[1]}</b>;
 
-  const matchItalic = line.match(regex.italic.local);
+  const matchItalic = span.match(regex.italic.local);
   if (matchItalic) return <i>{matchItalic[1]}</i>;
 
-  const matchStrikeThrough = line.match(regex.strikeThrough.local);
+  const matchStrikeThrough = span.match(regex.strikeThrough.local);
   if (matchStrikeThrough) return <span style={{textDecoration: 'line-through' }}>{matchStrikeThrough[1]}</span>;
 
-  if (line.match(regex.rawLink.global)) return <Link href={line}>{line}</Link>;
+  if (span.match(regex.rawLink.global)) return <Link href={span}>{span}</Link>;
 
-  return <>{line}</>;
+  return <>{span}</>;
 }
 
 
 export { splitter };
-export default InlineSyntax;
+export default SyntacticSpan;
 

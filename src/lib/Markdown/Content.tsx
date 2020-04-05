@@ -2,7 +2,6 @@ import React from 'react';
 
 import CodeBlock from './CodeBlock';
 import Text from './Text';
-import InlineSyntax from './InlineSyntax';
 import { ParserPropTypes } from './types';
 
 
@@ -44,7 +43,7 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
     const closeIndex = rawLines.findIndex(line => !denotesDottedList(line));
     const dottedListLines = rawLines.splice(0, closeIndex).slice(0, closeIndex);
     dottedListLines.unshift(line);
-    buffer = <ul>{dottedListLines.map(li => <li><InlineSyntax line={li} /></li>)}</ul>;
+    buffer = <ul>{dottedListLines.map(li => <li><Text line={li.slice(2)} /></li>)}</ul>;
   } else if (denotesOpenHtml(line)) {
     const tag = denotesOpenHtml(line);
     const closeIndex = rawLines.findIndex(line => denotesClosingHtml(line, tag));
