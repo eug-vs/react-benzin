@@ -7,9 +7,10 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.background.default,
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     overflowX: 'auto',
     fontFamily: 'Monospace',
+    scrollbarColor: 'auto'
   },
 }));
 
@@ -17,7 +18,7 @@ const CodeBlock: React.FC<ParserPropTypes> = ({ rawLines }) => {
   const classes = useStyles();
   return (
     <Paper variant="outlined" className={classes.root}>
-      {rawLines.map(line => <> {line} <br/> </>)}
+      {rawLines.map(line => <pre>{line}</pre>)}
     </Paper>
   );
 }
