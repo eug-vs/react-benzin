@@ -54,16 +54,12 @@ const App: React.FC = () => {
     `## Markdown\n [Markdown file](${url}) *(...${fileName})* that you can see on the left was parsed and processed by **BENZIN**! :rocket:`,
     'Switch between tabs on the header to explore other markdown templates. :recycle: ',
     'Currently **only core features** of markdown function.',
-    'Templates on the left are being loaded from the internet, though this pane is generated from plaintext. :pen:',
+    'Templates on the left are being loaded from the [GitHub](https://github.com), though this pane is generated from plaintext. :pen:',
     '## How do I use this feature?',
     '```',
     'import Markdown from \'react-benzin\';',
     'const data = \'# Header\\nHello, *world!*\';',
     'ReactDOM.render(<Markdown data={data}/>, document.getElementById(\'root\'));',
-    '```',
-    'Yep! **Or even simpler**:',
-    '```',
-    'ReactDOM.render(<Markdown url={url}/>, document.getElementById(\'root\'));',
     '```',
   ].join('\n');
 
