@@ -1,7 +1,8 @@
 {
   "name": "react-benzin",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A powerful React Material components library.",
+  "homepage": "https://eug-vs.github.io/react-benzin",
   "main": "dist/index.js",
   "files": [
     "dist",
@@ -11,12 +12,14 @@
     "start": "react-scripts start",
     "lint": "eslint . --ext ts,tsx --max-warnings 0",
     "test": "npm run lint && tsc",
-    "build": "rm -rf dist && tsc --project ts-compile-config.json",
+    "build": "rm -rf dist && tsc --project tsconfig.release.json",
     "deploy": "npm run lint && npm run build && npm publish --public"
   },
   "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^4.9.0",
+    "axios": "^0.19.2",
+    "emojilib": "^2.4.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-virtualized-auto-sizer": "^1.0.2",
@@ -33,6 +36,7 @@
     "@typescript-eslint/parser": "^2.19.0",
     "eslint": "^6.8.0",
     "eslint-config-react-app": "^5.1.0",
+    "gh-pages": "^2.2.0",
     "react-scripts": "^3.3.1",
     "typescript": "^3.7.5"
   },
