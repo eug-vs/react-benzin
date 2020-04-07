@@ -71,7 +71,11 @@ workflows:
 
   test:
     jobs:
-      - checkout_and_test
+      - checkout_and_test:
+          filters:
+            branches:
+              ignore: develop
+              ignore: master
 
   deploy:
     jobs:
