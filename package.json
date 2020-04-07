@@ -12,8 +12,10 @@
     "start": "react-scripts start",
     "lint": "eslint . --ext ts,tsx --max-warnings 0",
     "test": "npm run lint && tsc",
-    "build": "rm -rf dist && tsc --project tsconfig.release.json",
-    "deploy": "npm run lint && npm run build && npm publish --public"
+    "build-pages": "react-scripts build",
+    "deploy-pages": "gh-pages -d build",
+    "compile-dist": "rm -rf dist && tsc --project tsconfig.release.json",
+    "publish-package": "npm run lint && npm run build && npm publish --public"
   },
   "license": "MIT",
   "dependencies": {

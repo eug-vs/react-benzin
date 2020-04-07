@@ -29,7 +29,25 @@ jobs:
           name: Test syntax and perform type checking
           command: npm test
 
-  deploy:
+  deploy_pages:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - add_ssh_keys:
+          fingerprints:
+            - "02:a9:ad:b9:38:7c:39:70:20:ee:92:4c:86:27:43:9d"
+
+      - run:
+          name: Deploy to gh-pages
+          command: npm run deploy-pages
+
+  publish_package:
     <<: *defaults
     steps:
       - checkout
@@ -42,9 +60,10 @@ jobs:
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+
       - run:
-          name: Deploy package
-          command: npm run deploy
+          name: Publish package to NPM
+          command: npm run publish-package
 
 
 workflows:
@@ -57,17 +76,20 @@ workflows:
   deploy:
     jobs:
       - checkout_and_test:
+      - deploy_pages:
           filters:
             branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
-      - deploy:
+              only: develop
+          requires:
+            - checkout_and_test
+
+  publish:
+    jobs:
+      - checkout_and_test:
+      - publish_package:
           filters:
             branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
+              only: master
           requires:
             - checkout_and_test
 
