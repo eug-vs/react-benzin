@@ -51,7 +51,7 @@ const CustomPage: React.FC = () => {
   const [url, setUrl] = useState<string>('');
   const inputEl = useRef<HTMLInputElement>(null);
 
-  const handleParseUrl = () => {
+  const handleParseUrl = (): void => {
     setUrl(inputEl.current?.value || '');
   }
 
@@ -65,9 +65,7 @@ const CustomPage: React.FC = () => {
         <p>
           <TextField
             inputRef={inputEl}
-            variant="outlined"
-            color="secondary"
-            label="Markdown url"
+            variant="outlined" color="secondary" label="Markdown url"
           />
         </p>
         <Button variant="contained" color="secondary" onClick={handleParseUrl} >
@@ -84,7 +82,7 @@ const App: React.FC = () => {
   const classes = useStyles();
   const [page, setPage] = useState<string>('home');
 
-  const handleGoCustom = () => {
+  const handleGoCustom = (): void => {
     setPage('custom');
   }
 
