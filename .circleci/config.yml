@@ -44,6 +44,12 @@ jobs:
             - "02:a9:ad:b9:38:7c:39:70:20:ee:92:4c:86:27:43:9d"
 
       - run:
+          name: Configure github user
+          command: |
+            git config user.email "eug-vs@keemail.me"
+            git config user.name "eug-vs"
+
+      - run:
           name: Deploy to gh-pages
           command: npm run deploy-pages
 
