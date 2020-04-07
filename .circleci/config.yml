@@ -76,6 +76,9 @@ workflows:
   deploy:
     jobs:
       - checkout_and_test:
+          filters:
+            branches:
+              only: develop
       - deploy_pages:
           filters:
             branches:
@@ -86,6 +89,9 @@ workflows:
   publish:
     jobs:
       - checkout_and_test:
+          filters:
+            branches:
+              only: master
       - publish_package:
           filters:
             branches:
