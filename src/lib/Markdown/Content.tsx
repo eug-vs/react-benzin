@@ -6,11 +6,10 @@ import { ParserPropTypes } from './types';
 
 
 const denotesCodeBlock = (line: string): boolean => {
-  return line.match(/^```.*$/) !== null;
-}
+  return line.match(/^\s*```.*$/) !== null; }
 
 const denotesDottedList = (line: string): boolean => {
-  return line.match(/^ ?- .*$/) !== null;
+  return line.match(/^ ?[-*] .*$/) !== null;
 }
 
 const denotesOpenHtml= (line: string): string => {
@@ -53,7 +52,6 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
   } else if ((buffer = denotesSelfClosingHtml(line)) !== null) {
     const match = buffer[0];
     const [before, after] = line.split(match);
-    console.log({ line, match, before, after});
     buffer = (
       <>
         <Text line={before} />

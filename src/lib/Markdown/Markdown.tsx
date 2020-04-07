@@ -16,7 +16,7 @@ const Markdown: React.FC<PropTypes> = ({ data, url }) => {
   }, [data, url]);
 
   if (url) axios.get(url).then(response => setMarkdown(response.data));
-  return <Section rawLines={markdown.split('\n')} />
+  return <Section rawLines={markdown.split(/\r?\n/)} />
 };
 
 

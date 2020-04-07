@@ -42,7 +42,6 @@ const splitter = new RegExp(Object.values(regex).map(pair => pair.global.source)
 
 const emojiList: Emoji[] = [];
 Object.keys(emojiLib).forEach(name => emojiList.push({ name, char: emojiLib[name].char }));
-console.log({emojiList})
 
 const useStyles = makeStyles(theme => ({
   code: {
