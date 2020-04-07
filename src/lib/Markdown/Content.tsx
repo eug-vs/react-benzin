@@ -28,6 +28,10 @@ const denotesSelfClosingHtml = (line: string): string[] | null => {
   return line.match(regex);
 }
 
+const declaresNoLineBreak = (line: string): boolean => {
+  return line.match(/\\\|$/) !== null;
+}
+
 const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
   if (!rawLines.length) return null;
 
@@ -46,7 +50,7 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
   } else if ((buffer = denotesOpenHtml(line))) {
     const tag = buffer;
     const closeIndex = rawLines.findIndex(line => denotesClosingHtml(line, tag));
-    const htmlLines = rawLines.splice(0, closeIndex + 1).slice(0, closeIndex);
+    const htmlLines = rawLines.splice(0, closeIndex + 1);
     htmlLines.unshift(line);
     buffer = <div dangerouslySetInnerHTML={{ __html: htmlLines.join('\n') }}></div>;
   } else if ((buffer = denotesSelfClosingHtml(line)) !== null) {
@@ -59,6 +63,14 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
         <Text line={after} />
       </>
     );
+  } else if (declaresNoLineBreak(line)) {
+    const closeIndex = rawLines.findIndex(line => !declaresNoLineBreak(line));
+    const lineBreakLines = rawLines.splice(0, closeIndex).map(line => line.slice(0, -2));
+    lineBreakLines.unshift(line.slice(0, -2));
+    lineBreakLines.push(rawLines.splice(0, 1)[0]);
+    buffer = <p>{lineBreakLines.map(lineBreakLine => <Text line={lineBreakLine} />)}</p>;
+  } else if (denotesClosingHtml(line, '')) {
+    buffer = null;
   } else {
     buffer = <p><Text line={line} /></p>
   }
