@@ -24,8 +24,8 @@ const enclosureRegex = (e: string): RegexPair => ({
 
 const regex: Record<string, RegexPair> = {
   conceal: {
-    global: /(!?\[.+?\]\(.+?\))/g,
-    local: /!?\[(.+?)\]\((.+?)\)/
+    global: /(!?\[.+?\]\(.+?\))(?!])/g,
+    local: /!?\[(.*\]?.*)\]\((.+?)\)/
   },
   rawLink: {
     global: /((?:(?:[A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)(?:(?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/,
@@ -63,7 +63,7 @@ const SyntacticSpan: React.FC<PropTypes> = ({ span }) => {
   const matchConceal = regex.conceal.local.exec(span);
   if (matchConceal) {
     if (span[0] === '!') return <img src={matchConceal[2]} alt={matchConceal[1]} className={classes.image} />;
-    return <Link href={matchConceal[2]}>{matchConceal[1]}</Link>;
+    return <Link href={matchConceal[2]}><SyntacticSpan span={matchConceal[1]} /></Link>;
   }
 
   const matchEmoji = span.match(regex.emoji.local);
