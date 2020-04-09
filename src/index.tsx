@@ -86,7 +86,6 @@ interface LivePropTypes {
 }
 
 const LivePreviewPage: React.FC<LivePropTypes> = ({ setLivePreviewData }) => {
-  const classes = useStyles();
   const inputEl = useRef<HTMLInputElement>(null);
 
   const handleRender = (): void => {
