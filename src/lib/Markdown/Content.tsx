@@ -6,11 +6,10 @@ import { ParserPropTypes } from './types';
 
 
 const denotesCodeBlock = (line: string): boolean => {
-  return line.match(/^```.*$/) !== null;
-}
+  return line.match(/^\s*```.*$/) !== null; }
 
 const denotesDottedList = (line: string): boolean => {
-  return line.match(/^ ?- .*$/) !== null;
+  return line.match(/^ ?[-*] .*$/) !== null;
 }
 
 const denotesOpenHtml= (line: string): string => {
@@ -27,6 +26,10 @@ const denotesClosingHtml= (line: string, tag: string): boolean => {
 const denotesSelfClosingHtml = (line: string): string[] | null => {
   const regex = /(<[^/\s]*[^<]*\/>)/g;
   return line.match(regex);
+}
+
+const declaresNoLineBreak = (line: string): boolean => {
+  return line.match(/\\\|$/) !== null;
 }
 
 const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
@@ -46,14 +49,13 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
     buffer = <ul>{dottedListLines.map(li => <li><Text line={li.slice(2)} /></li>)}</ul>;
   } else if ((buffer = denotesOpenHtml(line))) {
     const tag = buffer;
-    const closeIndex = rawLines.findIndex(line => denotesClosingHtml(line, tag));
-    const htmlLines = rawLines.splice(0, closeIndex + 1).slice(0, closeIndex);
+    const closeIndex = denotesClosingHtml(line, tag) ? -1 : rawLines.findIndex(line => denotesClosingHtml(line, tag));
+    const htmlLines = rawLines.splice(0, closeIndex + 1);
     htmlLines.unshift(line);
     buffer = <div dangerouslySetInnerHTML={{ __html: htmlLines.join('\n') }}></div>;
   } else if ((buffer = denotesSelfClosingHtml(line)) !== null) {
     const match = buffer[0];
     const [before, after] = line.split(match);
-    console.log({ line, match, before, after});
     buffer = (
       <>
         <Text line={before} />
@@ -61,6 +63,14 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
         <Text line={after} />
       </>
     );
+  } else if (declaresNoLineBreak(line)) {
+    const closeIndex = rawLines.findIndex(line => !declaresNoLineBreak(line));
+    const lineBreakLines = rawLines.splice(0, closeIndex).map(line => line.slice(0, -2));
+    lineBreakLines.unshift(line.slice(0, -2));
+    lineBreakLines.push(rawLines.splice(0, 1)[0]);
+    buffer = <p>{lineBreakLines.map(lineBreakLine => <Text line={lineBreakLine} />)}</p>;
+  } else if (denotesClosingHtml(line, '')) {
+    buffer = null;
   } else {
     buffer = <p><Text line={line} /></p>
   }
