@@ -38,6 +38,7 @@ const headerContents = {
   'spacevim': null,
   'material-ui': null,
   'custom': null,
+  'live preview': null,
 };
 
 const pageMap: Record<string, string> = {
@@ -64,8 +65,11 @@ const CustomPage: React.FC = () => {
         </p>
         <p>
           <TextField
+            fullWidth
             inputRef={inputEl}
-            variant="outlined" color="secondary" label="Markdown url"
+            variant="outlined"
+            color="secondary"
+            label="Markdown url"
           />
         </p>
         <Button variant="contained" color="secondary" onClick={handleParseUrl} >
@@ -77,18 +81,53 @@ const CustomPage: React.FC = () => {
   );
 }
 
+interface LivePropTypes {
+  setLivePreviewData: (livePreviewData: string) => void;
+}
+
+const LivePreviewPage: React.FC<LivePropTypes> = ({ setLivePreviewData }) => {
+  const classes = useStyles();
+  const inputEl = useRef<HTMLInputElement>(null);
+
+  const handleRender = (): void => {
+    setLivePreviewData(inputEl.current?.value || '');
+  }
+
+  return (
+    <>
+      <ContentSection sectionName="Markdown live preview" level={2} >
+        <p>
+          Start typing and see your text rendered on the left window! We recommend starting with # Header.
+        </p>
+        <p>
+          <TextField
+            fullWidth
+            multiline
+            inputRef={inputEl}
+            variant="outlined"
+            color="primary"
+            label="Markdown"
+            onChange={handleRender}
+          />
+        </p>
+      </ContentSection>
+    </>
+  )
+}
+
 
 const App: React.FC = () => {
   const classes = useStyles();
   const [page, setPage] = useState<string>('home');
+  const [livePreviewData, setLivePreviewData] = useState<string>('');
 
-  const handleGoCustom = (): void => {
-    setPage('custom');
+  const handleGoLivePreview = (): void => {
+    setPage('live preview');
   }
 
   const url = pageMap[page];
   const fileName = url?.slice(url.lastIndexOf('/') + 1);
-  const metadata = [
+  const info = [
     `## Markdown\n [Markdown file](${url}) *(...${fileName})* that you can see on the left was parsed and rendered by **BENZIN**! :rocket:`,
     'Switch between tabs on the header to explore other markdown templates. :recycle: ',
     'Currently **only core features** of markdown function.',
@@ -118,23 +157,33 @@ const App: React.FC = () => {
             (page === 'custom') ?
             <CustomPage />
             :
+            (page === 'live preview') ?
+            <Markdown data={livePreviewData || '# Start typing in the right window!'} />
+            :
             <Markdown url={url} />
           }
         </div>
       </Window>
       <Window type="secondary" name="Feature preview">
         <div className={classes.window}>
-          <Markdown data={metadata} />
-          <p className={classes.promoButton}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              onClick={handleGoCustom}
-            >
-              Render custom document
-            </Button>
-          </p>
+          {
+            (page === 'live preview') ?
+            <LivePreviewPage setLivePreviewData={setLivePreviewData} />
+            :
+            <>
+              <Markdown data={info} />
+              <p className={classes.promoButton}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  onClick={handleGoLivePreview}
+                >
+                  Try it yourself!
+                </Button>
+              </p>
+            </>
+          }
         </div>
       </Window>
     </Benzin>
