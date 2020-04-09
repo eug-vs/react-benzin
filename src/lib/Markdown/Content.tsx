@@ -49,7 +49,7 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
     buffer = <ul>{dottedListLines.map(li => <li><Text line={li.slice(2)} /></li>)}</ul>;
   } else if ((buffer = denotesOpenHtml(line))) {
     const tag = buffer;
-    const closeIndex = rawLines.findIndex(line => denotesClosingHtml(line, tag));
+    const closeIndex = denotesClosingHtml(line, tag) ? -1 : rawLines.findIndex(line => denotesClosingHtml(line, tag));
     const htmlLines = rawLines.splice(0, closeIndex + 1);
     htmlLines.unshift(line);
     buffer = <div dangerouslySetInnerHTML={{ __html: htmlLines.join('\n') }}></div>;
