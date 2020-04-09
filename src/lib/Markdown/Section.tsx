@@ -1,5 +1,6 @@
 import React from 'react';
 import ContentSection from '../ContentSection/ContentSection';
+import { Typography } from '@material-ui/core';
 import Content from './Content';
 import { ParserPropTypes } from './types';
 
@@ -32,7 +33,7 @@ const Section: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
 
   if (!level) return (
     <>
-      <Content rawLines={rawContent} />
+      <Typography> <Content rawLines={rawContent} /> </Typography>
       <ChildrenSections rawLines={rawLines} level={getHeaderLevel(rawLines[0])}/>
     </>
   )
