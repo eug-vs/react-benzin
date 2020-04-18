@@ -40,17 +40,19 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
 
   let buffer;
   if (denotesCodeBlock(line)) {
-    const closeIndex = rawLines.findIndex(line => denotesCodeBlock(line));
+    const closeIndex = rawLines.findIndex(rawLine => denotesCodeBlock(rawLine));
     const codeBlockLines = rawLines.splice(0, closeIndex + 1).slice(0, closeIndex);
     buffer = <CodeBlock rawLines={codeBlockLines} />;
   } else if (denotesDottedList(line)) {
-    const closeIndex = rawLines.findIndex(line => !denotesDottedList(line));
+    const closeIndex = rawLines.findIndex(rawLine => !denotesDottedList(rawLine));
     const dottedListLines = rawLines.splice(0, closeIndex).slice(0, closeIndex);
     dottedListLines.unshift(line);
     buffer = <ul>{dottedListLines.map(li => <li><Text line={li.slice(2)} /></li>)}</ul>;
   } else if ((buffer = denotesOpenHtml(line))) {
     const tag = buffer;
-    const closeIndex = denotesClosingHtml(line, tag) ? -1 : rawLines.findIndex(line => denotesClosingHtml(line, tag));
+    const closeIndex = denotesClosingHtml(line, tag) ? -1 : rawLines.findIndex(
+      rawLine => denotesClosingHtml(rawLine, tag),
+    );
     const htmlLines = rawLines.splice(0, closeIndex + 1);
     htmlLines.unshift(line);
     buffer = <div dangerouslySetInnerHTML={{ __html: htmlLines.join('\n') }} />;
@@ -65,8 +67,8 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
       </>
     );
   } else if (declaresNoLineBreak(line)) {
-    const closeIndex = rawLines.findIndex(line => !declaresNoLineBreak(line));
-    const lineBreakLines = rawLines.splice(0, closeIndex).map(line => line.slice(0, -2));
+    const closeIndex = rawLines.findIndex(rawLine => !declaresNoLineBreak(rawLine));
+    const lineBreakLines = rawLines.splice(0, closeIndex).map(rawLine => rawLine.slice(0, -2));
     lineBreakLines.unshift(line.slice(0, -2));
     lineBreakLines.push(rawLines.splice(0, 1)[0]);
     buffer = <p>{lineBreakLines.map(lineBreakLine => <Text line={lineBreakLine} />)}</p>;

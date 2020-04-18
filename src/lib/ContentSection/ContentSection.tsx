@@ -26,11 +26,11 @@ const useStyles = makeStyles(theme => ({
 const ContentSection: React.FC<PropTypes> = ({ sectionName, children, level = 0 }) => {
   const classes = useStyles();
 
-  level += 2; // Make everything smaller
-  if (level > 6) level = 6;
+  let adjustedLevel = level + 2; // Make everything smaller
+  if (adjustedLevel > 6) adjustedLevel = 6;
 
   type Variant = 'h3' | 'h4' | 'h5' | 'h6';
-  const variant: Variant = `h${level}` as Variant;
+  const variant: Variant = `h${adjustedLevel}` as Variant;
 
   return (
     <>

@@ -12,7 +12,9 @@
     "jsx-quotes": ["error", "prefer-double"],
     "quotes": ["error", "single"],
     "react/prop-types": 0,
+    "react/no-children-prop": 0,
     "arrow-body-style": 0,
+    "no-cond-assign": 0,
     "arrow-parens": [2, "as-needed"],
     "no-multiple-empty-lines": [2, { "max": 2, "maxEOF": 1 } ]
   }

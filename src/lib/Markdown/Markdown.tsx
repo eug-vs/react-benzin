@@ -8,10 +8,13 @@ interface PropTypes {
   url?: string;
 }
 
-const resolveUrls = (line: string, baseUrl: string): string => {
-  return line.replace(/src="(?!http)(.*)"[\s>]/, (match, url, offset, string) => `src="${baseUrl}/${url}?sanitize=true"`)
-    .replace(/\[(.*\]?.*)\]\((?!http)(.+?)\)/, (match, text, url, offset, string) => `[${text}](${baseUrl}/${url})`);
-};
+const resolveUrls = (line: string, baseUrl: string): string => line.replace(
+  /src="(?!http)(.*)"[\s>]/,
+  (match, url) => `src="${baseUrl}/${url}?sanitize=true"`,
+).replace(
+  /\[(.*\]?.*)\]\((?!http)(.+?)\)/,
+  (match, text, url) => `[${text}](${baseUrl}/${url})`,
+);
 
 const Markdown: React.FC<PropTypes> = ({ data, url }) => {
   const [markdown, setMarkdown] = useState<string>(data || '');
