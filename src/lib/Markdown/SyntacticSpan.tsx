@@ -28,6 +28,7 @@ const regex: Record<string, RegexPair> = {
     local: /!?\[(.*\]?.*)\]\((.+?)\)/,
   },
   rawLink: {
+    // eslint-disable-next-line max-len
     global: /((?:(?:[A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)(?:(?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/,
     local: /&^/,
   },
@@ -68,7 +69,7 @@ const SyntacticSpan: React.FC<PropTypes> = ({ span }) => {
 
   const matchEmoji = span.match(regex.emoji.local);
   if (matchEmoji) {
-    const emoji = emojiList.find(emoji => emoji.name === matchEmoji[1]);
+    const emoji = emojiList.find(e => e.name === matchEmoji[1]);
     return <span>{emoji ? emoji.char : span}</span>;
   }
 

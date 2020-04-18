@@ -11,7 +11,7 @@ interface PropTypes extends ParserPropTypes {
 const getHeaderLevel = (header: string): number => {
   if (!header) return 0;
   let level = 0;
-  while (header[level] === '#') level++;
+  while (header[level] === '#') level += 1;
   return level;
 };
 
