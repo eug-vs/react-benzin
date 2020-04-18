@@ -6,31 +6,32 @@ import { ParserPropTypes } from './types';
 
 
 const denotesCodeBlock = (line: string): boolean => {
-  return line.match(/^\s*```.*$/) !== null; }
+  return line.match(/^\s*```.*$/) !== null;
+};
 
 const denotesDottedList = (line: string): boolean => {
   return line.match(/^ ?[-*] .*$/) !== null;
-}
+};
 
-const denotesOpenHtml= (line: string): string => {
+const denotesOpenHtml = (line: string): string => {
   const regex = /<([^/\s]*)[^<]*[^/]>/g;
   const match = regex.exec(line);
   return match ? match[1] : '';
-}
+};
 
-const denotesClosingHtml= (line: string, tag: string): boolean => {
+const denotesClosingHtml = (line: string, tag: string): boolean => {
   const regex = new RegExp(`</${tag}[^<]*>`);
   return line.match(regex) !== null;
-}
+};
 
 const denotesSelfClosingHtml = (line: string): string[] | null => {
   const regex = /(<[^/\s]*[^<]*\/>)/g;
   return line.match(regex);
-}
+};
 
 const declaresNoLineBreak = (line: string): boolean => {
   return line.match(/\\\|$/) !== null;
-}
+};
 
 const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
   if (!rawLines.length) return null;
@@ -41,7 +42,7 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
   if (denotesCodeBlock(line)) {
     const closeIndex = rawLines.findIndex(line => denotesCodeBlock(line));
     const codeBlockLines = rawLines.splice(0, closeIndex + 1).slice(0, closeIndex);
-    buffer = <CodeBlock rawLines={codeBlockLines} />
+    buffer = <CodeBlock rawLines={codeBlockLines} />;
   } else if (denotesDottedList(line)) {
     const closeIndex = rawLines.findIndex(line => !denotesDottedList(line));
     const dottedListLines = rawLines.splice(0, closeIndex).slice(0, closeIndex);
@@ -52,14 +53,14 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
     const closeIndex = denotesClosingHtml(line, tag) ? -1 : rawLines.findIndex(line => denotesClosingHtml(line, tag));
     const htmlLines = rawLines.splice(0, closeIndex + 1);
     htmlLines.unshift(line);
-    buffer = <div dangerouslySetInnerHTML={{ __html: htmlLines.join('\n') }}></div>;
+    buffer = <div dangerouslySetInnerHTML={{ __html: htmlLines.join('\n') }} />;
   } else if ((buffer = denotesSelfClosingHtml(line)) !== null) {
     const match = buffer[0];
     const [before, after] = line.split(match);
     buffer = (
       <>
         <Text line={before} />
-        <div dangerouslySetInnerHTML={{ __html: match }}></div>
+        <div dangerouslySetInnerHTML={{ __html: match }} />
         <Text line={after} />
       </>
     );
@@ -72,7 +73,7 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
   } else if (denotesClosingHtml(line, '')) {
     buffer = null;
   } else {
-    buffer = <p><Text line={line} /></p>
+    buffer = <p><Text line={line} /></p>;
   }
 
   return (
@@ -81,7 +82,7 @@ const Content: React.FC<ParserPropTypes> = ({ rawLines }) => {
       <Content rawLines={rawLines} />
     </>
   );
-}
+};
 
 export default Content;
 

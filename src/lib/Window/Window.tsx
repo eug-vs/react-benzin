@@ -47,12 +47,13 @@ const Window: React.FC<PropTypes> = ({ type, name, children }) => {
       size={size}
       position={position}
     >
-      {name &&
+      {name
+      && (
       <div>
         <Typography variant="h5" className={classes.header}>{name}</Typography>
         <Divider />
       </div>
-      }
+      )}
       {children}
     </WindowSurface>
   );

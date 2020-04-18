@@ -21,8 +21,7 @@ interface Size {
 
 
 const SmartList: React.FC<PropTypes> = ({ itemSize, itemCount, renderItem }) => {
-
-  const ResizedList: React.FC<Size> = ({ width, height}) => (
+  const ResizedList: React.FC<Size> = ({ width, height }) => (
     <FixedSizeList
       height={height}
       width={width}

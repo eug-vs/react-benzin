@@ -27,23 +27,23 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.spacing(4),
-  }
+  },
 }));
 
 
-const Icon = <img src={icon} width="32px" height="37px" alt="logo"/>
+const Icon = <img src={icon} width="32px" height="37px" alt="logo" />;
 
 const headerContents = {
   home: null,
-  'spacevim': null,
+  spacevim: null,
   'material-ui': null,
-  'custom': null,
+  custom: null,
   'live preview': null,
 };
 
 const pageMap: Record<string, string> = {
   home: 'https://raw.githubusercontent.com/eug-vs/react-benzin/develop/README.md',
-  'spacevim': 'https://raw.githubusercontent.com/spacevim/spacevim/master/README.md',
+  spacevim: 'https://raw.githubusercontent.com/spacevim/spacevim/master/README.md',
   'material-ui': 'https://raw.githubusercontent.com/mui-org/material-ui/master/README.md',
 };
 
@@ -54,11 +54,11 @@ const CustomPage: React.FC = () => {
 
   const handleParseUrl = (): void => {
     setUrl(inputEl.current?.value || '');
-  }
+  };
 
   return (
     <>
-      <ContentSection sectionName="Render custom markdown document" level={2} >
+      <ContentSection sectionName="Render custom markdown document" level={2}>
         <p>
           This should be a link to a valid markdown file. Response should give the file contents.
           If you copy README file from GitHub, make sure you provide link to raw view.
@@ -72,14 +72,14 @@ const CustomPage: React.FC = () => {
             label="Markdown url"
           />
         </p>
-        <Button variant="contained" color="secondary" onClick={handleParseUrl} >
+        <Button variant="contained" color="secondary" onClick={handleParseUrl}>
           Render!
         </Button>
       </ContentSection>
       <Markdown url={url} />
     </>
   );
-}
+};
 
 interface LivePropTypes {
   setLivePreviewData: (livePreviewData: string) => void;
@@ -90,11 +90,11 @@ const LivePreviewPage: React.FC<LivePropTypes> = ({ setLivePreviewData }) => {
 
   const handleRender = (): void => {
     setLivePreviewData(inputEl.current?.value || '');
-  }
+  };
 
   return (
     <>
-      <ContentSection sectionName="Markdown live preview" level={2} >
+      <ContentSection sectionName="Markdown live preview" level={2}>
         <p>
           Start typing and see your text rendered on the left window! We recommend starting with # Header.
         </p>
@@ -111,8 +111,8 @@ const LivePreviewPage: React.FC<LivePropTypes> = ({ setLivePreviewData }) => {
         </p>
       </ContentSection>
     </>
-  )
-}
+  );
+};
 
 
 const App: React.FC = () => {
@@ -122,7 +122,7 @@ const App: React.FC = () => {
 
   const handleGoLivePreview = (): void => {
     setPage('live preview');
-  }
+  };
 
   const url = pageMap[page];
   const fileName = url?.slice(url.lastIndexOf('/') + 1);
@@ -153,35 +153,34 @@ const App: React.FC = () => {
       <Window type="primary">
         <div className={classes.window}>
           {
-            (page === 'custom') ?
-            <CustomPage />
-            :
-            (page === 'live preview') ?
-            <Markdown data={livePreviewData || '# Start typing in the right window!'} />
-            :
-            <Markdown url={url} />
+            (page === 'custom')
+              ? <CustomPage />
+              : (page === 'live preview')
+                ? <Markdown data={livePreviewData || '# Start typing in the right window!'} />
+                : <Markdown url={url} />
           }
         </div>
       </Window>
       <Window type="secondary" name="Feature preview">
         <div className={classes.window}>
           {
-            (page === 'live preview') ?
-            <LivePreviewPage setLivePreviewData={setLivePreviewData} />
-            :
-            <>
-              <Markdown data={info} />
-              <p className={classes.promoButton}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  onClick={handleGoLivePreview}
-                >
-                  Try it yourself!
-                </Button>
-              </p>
-            </>
+            (page === 'live preview')
+              ? <LivePreviewPage setLivePreviewData={setLivePreviewData} />
+              : (
+                <>
+                  <Markdown data={info} />
+                  <p className={classes.promoButton}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      onClick={handleGoLivePreview}
+                    >
+                      Try it yourself!
+                    </Button>
+                  </p>
+                </>
+              )
           }
         </div>
       </Window>

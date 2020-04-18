@@ -8,9 +8,9 @@ import 'typeface-roboto';
 
 declare module '@material-ui/core/styles/createPalette' {
   interface TypeBackground {
-      elevation1: string;
-      elevation2: string;
-      elevation3: string;
+    elevation1: string;
+    elevation2: string;
+    elevation3: string;
   }
 }
 
@@ -34,7 +34,7 @@ const benzinTheme = createMuiTheme({
     text: {
       primary: '#f4f4f4',
       secondary: 'rgba(255, 255, 255, 0.6)',
-    }
+    },
   },
 });
 

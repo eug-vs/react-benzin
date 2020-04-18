@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Typography,
   Divider,
-  makeStyles
+  makeStyles,
 } from '@material-ui/core';
 
 
@@ -30,18 +30,17 @@ const ContentSection: React.FC<PropTypes> = ({ sectionName, children, level = 0 
   if (level > 6) level = 6;
 
   type Variant = 'h3' | 'h4' | 'h5' | 'h6';
-  const variant: Variant = 'h' + level as Variant;
+  const variant: Variant = `h${level}` as Variant;
 
   return (
     <>
       <Typography variant={variant}>{sectionName}</Typography>
-      <Divider variant="middle"/>
+      <Divider variant="middle" />
       <Typography component="div" className={classes.content}>
         {children}
       </Typography>
     </>
   );
-
 };
 
 

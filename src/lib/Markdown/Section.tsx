@@ -1,6 +1,6 @@
 import React from 'react';
-import ContentSection from '../ContentSection/ContentSection';
 import { Typography } from '@material-ui/core';
+import ContentSection from '../ContentSection/ContentSection';
 import Content from './Content';
 import { ParserPropTypes } from './types';
 
@@ -11,9 +11,9 @@ interface PropTypes extends ParserPropTypes {
 const getHeaderLevel = (header: string): number => {
   if (!header) return 0;
   let level = 0;
-  while(header[level] === '#') level++;
+  while (header[level] === '#') level++;
   return level;
-}
+};
 
 const ChildrenSections: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
   const childrenSectionLines = rawLines.reduce((sections: string[][], line: string) => {
@@ -23,20 +23,22 @@ const ChildrenSections: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
     }
     return sections;
   }, []);
-  const children = childrenSectionLines.map(sectionLines => <Section rawLines={sectionLines} level={level}/>);
-  return <> {children} </>;
-}
+  const children = childrenSectionLines.map(sectionLines => <Section rawLines={sectionLines} level={level} />);
+  return <>{children}</>;
+};
 
 const Section: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
   const deeperLevelIndex = rawLines.findIndex(line => line.match(`^#{${level + 1},} .*$`));
   const rawContent = rawLines.splice(0, (deeperLevelIndex < 0) ? rawLines.length : deeperLevelIndex);
 
-  if (!level) return (
-    <>
-      <Typography> <Content rawLines={rawContent} /> </Typography>
-      <ChildrenSections rawLines={rawLines} level={getHeaderLevel(rawLines[0])}/>
-    </>
-  )
+  if (!level) {
+    return (
+      <>
+        <Typography><Content rawLines={rawContent} /></Typography>
+        <ChildrenSections rawLines={rawLines} level={getHeaderLevel(rawLines[0])} />
+      </>
+    );
+  }
 
   const sectionName = rawContent.splice(0, 1)[0].slice(level).trim();
   const deeperLevel = getHeaderLevel(rawLines[0]);
@@ -46,7 +48,7 @@ const Section: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
       <ChildrenSections rawLines={rawLines} level={deeperLevel} />
     </ContentSection>
   );
-}
+};
 
 export default Section;
 
