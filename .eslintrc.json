@@ -10,6 +10,10 @@
   "ignorePatterns": "dist/",
   "rules": {
     "jsx-quotes": ["error", "prefer-double"],
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
+    "react/prop-types": 0,
+    "arrow-body-style": 0,
+    "arrow-parens": [2, "as-needed"],
+    "no-multiple-empty-lines": [2, { "max": 2, "maxEOF": 1 } ]
   }
 }
