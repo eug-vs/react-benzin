@@ -59,4 +59,6 @@ $ npm run build
 This command will generate `dist/` folder ready for distribution, which you of course can explore. Note that `tsc` creates type definitions (`.d.ts`) for every corresponding `.js` file. It's very useful because consumers also get access to them.
 
 ## Deploying
-Deploying to `npm` is fully automated through **CircleCI**: simply tag a commit as a Release and it will do the job.
+Publishing to `npm` is fully automated through **CircleCI** - package is deployed on every push into `master`. Therefore only release *PR*'s should be merged into `master` branch.
+
+Deploying to `gh-pages` is automatically performed on every commit into `develop` branch.

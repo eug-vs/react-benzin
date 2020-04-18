@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     '& a.MuiTypography-root': {
       color: theme.palette.primary.light,
     },
-  }
+  },
 }));
 
 
@@ -32,12 +32,12 @@ const WindowSurface: React.FC<PropTypes> = ({ size, position, children }) => {
   return (
     <Paper
       variant="outlined"
-      style={{...size, ...position}}
+      style={{ ...size, ...position }}
       className={classes.surface}
     >
       {children}
     </Paper>
-  )
+  );
 };
 
 
