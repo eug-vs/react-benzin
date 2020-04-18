@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d227cca93932693f1400467552d21c77",
+    "revision": "851b7a049a62e15cc56f5a115279a916",
     "url": "/react-benzin/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-benzin/static/js/2.a7931ec3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "218e96be06eacfd15f04",
-    "url": "/react-benzin/static/js/main.76c0462e.chunk.js"
+    "revision": "d4e253a4adc212be7e5f",
+    "url": "/react-benzin/static/js/main.4193a873.chunk.js"
   },
   {
     "revision": "1cb71c360947ee2e6bc9",
