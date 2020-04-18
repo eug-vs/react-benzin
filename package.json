@@ -1,6 +1,6 @@
 {
   "name": "react-benzin",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "A powerful React Material components library.",
   "homepage": "https://eug-vs.github.io/react-benzin",
   "main": "dist/index.js",
@@ -15,7 +15,7 @@
     "build-pages": "react-scripts build",
     "deploy-pages": "npm run build-pages && gh-pages -d build",
     "compile-dist": "rm -rf dist && tsc --project tsconfig.release.json",
-    "publish-package": "npm run lint && npm run build && npm publish --public"
+    "publish-package": "npm run lint && npm run compile-dist && npm publish --public"
   },
   "license": "MIT",
   "dependencies": {
