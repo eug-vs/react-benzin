@@ -1,12 +1,23 @@
 {
   "parser": "@typescript-eslint/parser",
   "extends": [
-    "react-app",
+    "airbnb-typescript",
     "plugin:@typescript-eslint/recommended"
   ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "ignorePatterns": "dist/",
   "rules": {
     "jsx-quotes": ["error", "prefer-double"],
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
+    "no-multiple-empty-lines": [2, { "max": 2, "maxEOF": 1 } ],
+    "max-len": ["error", { "code": 120 }],
+    "arrow-parens": [2, "as-needed"],
+    "arrow-body-style": 0,
+    "no-cond-assign": 0,
+    "react/prop-types": 0,
+    "react/no-children-prop": 0,
+    "react/no-danger": 0
   }
 }

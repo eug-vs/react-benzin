@@ -7,7 +7,7 @@ interface PropTypes {
 
 const Text: React.FC<PropTypes> = ({ line }) => {
   return <>{line.split(splitter).map(span => <SyntacticSpan span={span} />)}</>;
-}
+};
 
 export default Text;
 

@@ -40,13 +40,15 @@ const useStyles = makeStyles(theme => ({
       '& svg': {
         marginRight: theme.spacing(1),
         marginBottom: '0 !important',
-      }
-    }
-  }
+      },
+    },
+  },
 }));
 
 
-const Header: React.FC<PropTypes> = ({ logo, contents, page, setPage }) => {
+const Header: React.FC<PropTypes> = ({
+  logo, contents, page, setPage,
+}) => {
   const classes = useStyles();
 
   const handleChange = (event: React.ChangeEvent<{}>, newPage: string): void => {
@@ -54,25 +56,25 @@ const Header: React.FC<PropTypes> = ({ logo, contents, page, setPage }) => {
   };
 
   return (
-  <AppBar position="sticky" className={classes.root}>
-    <Toolbar>
-      {logo.icon}
-      <Typography variant="h5" className={classes.logo} color="primary">
-        {logo.title}
-      </Typography>
-      <Tabs onChange={handleChange} value={page}>
-        {contents && Object.keys(contents).map((item: string) => (
-          <Tab
-            label={item}
-            icon={contents[item] as JSX.Element}
-            value={item}
-            className={classes.tab}
-            key={item}
-          />
-        ))}
-      </Tabs>
-    </Toolbar>
-  </AppBar>
+    <AppBar position="sticky" className={classes.root}>
+      <Toolbar>
+        {logo.icon}
+        <Typography variant="h5" className={classes.logo} color="primary">
+          {logo.title}
+        </Typography>
+        <Tabs onChange={handleChange} value={page}>
+          {contents && Object.keys(contents).map((item: string) => (
+            <Tab
+              label={item}
+              icon={contents[item] as JSX.Element}
+              value={item}
+              className={classes.tab}
+              key={item}
+            />
+          ))}
+        </Tabs>
+      </Toolbar>
+    </AppBar>
   );
 };
 

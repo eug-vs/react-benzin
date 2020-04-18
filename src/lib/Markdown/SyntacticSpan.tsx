@@ -19,24 +19,25 @@ interface Emoji {
 
 const enclosureRegex = (e: string): RegexPair => ({
   local: new RegExp(`${e}([^${e}]+)${e}`),
-  global: new RegExp(`(${e}[^${e}]+${e})`)
+  global: new RegExp(`(${e}[^${e}]+${e})`),
 });
 
 const regex: Record<string, RegexPair> = {
   conceal: {
     global: /(!?\[.+?\]\(.+?\))(?!])/g,
-    local: /!?\[(.*\]?.*)\]\((.+?)\)/
+    local: /!?\[(.*\]?.*)\]\((.+?)\)/,
   },
   rawLink: {
+    // eslint-disable-next-line max-len
     global: /((?:(?:[A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)(?:(?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/,
-    local: /&^/
+    local: /&^/,
   },
   emoji: enclosureRegex(':'),
   bold: enclosureRegex('\\*\\*'),
   italic: enclosureRegex('\\*'),
   code: enclosureRegex('`'),
   strikeThrough: enclosureRegex('~~'),
-}
+};
 
 const splitter = new RegExp(Object.values(regex).map(pair => pair.global.source).join('|'));
 
@@ -46,13 +47,13 @@ Object.keys(emojiLib).forEach(name => emojiList.push({ name, char: emojiLib[name
 const useStyles = makeStyles(theme => ({
   code: {
     background: theme.palette.background.default,
-    borderRadius: theme.spacing(.5),
-    padding: theme.spacing(.5),
+    borderRadius: theme.spacing(0.5),
+    padding: theme.spacing(0.5),
     fontFamily: 'Monospace',
   },
   image: {
     maxWidth: '100%',
-    maxHeight: '100%'
+    maxHeight: '100%',
   },
 }));
 
@@ -68,7 +69,7 @@ const SyntacticSpan: React.FC<PropTypes> = ({ span }) => {
 
   const matchEmoji = span.match(regex.emoji.local);
   if (matchEmoji) {
-    const emoji = emojiList.find(emoji => emoji.name === matchEmoji[1]);
+    const emoji = emojiList.find(e => e.name === matchEmoji[1]);
     return <span>{emoji ? emoji.char : span}</span>;
   }
 
@@ -82,12 +83,12 @@ const SyntacticSpan: React.FC<PropTypes> = ({ span }) => {
   if (matchItalic) return <i>{matchItalic[1]}</i>;
 
   const matchStrikeThrough = span.match(regex.strikeThrough.local);
-  if (matchStrikeThrough) return <span style={{textDecoration: 'line-through' }}>{matchStrikeThrough[1]}</span>;
+  if (matchStrikeThrough) return <span style={{ textDecoration: 'line-through' }}>{matchStrikeThrough[1]}</span>;
 
   if (span.match(regex.rawLink.global)) return <Link href={span}>{span}</Link>;
 
   return <>{span}</>;
-}
+};
 
 
 export { splitter };

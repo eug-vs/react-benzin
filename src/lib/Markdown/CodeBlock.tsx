@@ -1,8 +1,8 @@
 import React from 'react';
-import { ParserPropTypes } from './types';
 import { Paper } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { ParserPropTypes } from './types';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     overflowX: 'auto',
     fontFamily: 'Monospace',
-    scrollbarColor: 'auto'
+    scrollbarColor: 'auto',
   },
 }));
 
@@ -21,7 +21,7 @@ const CodeBlock: React.FC<ParserPropTypes> = ({ rawLines }) => {
       {rawLines.map(line => <pre>{line}</pre>)}
     </Paper>
   );
-}
+};
 
 export default CodeBlock;
 
