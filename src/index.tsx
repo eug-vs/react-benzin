@@ -1,7 +1,12 @@
 import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-import { makeStyles, TextField, Button } from '@material-ui/core';
+import {
+  makeStyles,
+  TextField,
+  Button,
+  Link,
+} from '@material-ui/core';
 
 import {
   Benzin,
@@ -97,6 +102,11 @@ const LivePreviewPage: React.FC<LivePropTypes> = ({ setLivePreviewData }) => {
       <ContentSection sectionName="Markdown live preview" level={2}>
         <p>
           Start typing and see your text rendered on the left window!
+          You can find the list of all Markdown features {' '}
+          <Link href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">
+            here
+          </Link>
+          . (some of them are yet in progress).
           We recommend starting with # Header.
         </p>
         <p>
@@ -131,7 +141,6 @@ const App: React.FC = () => {
     /* eslint-disable max-len */
     `## Markdown\n [Markdown file](${url}) *(...${fileName})* that you can see on the left was parsed and rendered by **BENZIN**! :rocket:`,
     'Switch between tabs on the header to explore other markdown templates. :recycle: ',
-    'Currently **only core features** of markdown function.',
     'Templates on the left are being loaded from the [GitHub](https://github.com), though this pane is generated from plaintext. :pen:',
     '## How do I use this feature?',
     '```',
