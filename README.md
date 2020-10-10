@@ -1,14 +1,16 @@
 <p align="center"><img src="src/assets/icon.svg" /></p>
 <h1 align="center"> BENZIN </h1>
 
-[React](https://reactjs.org/) Material components library. It supplies you with cool pre-defined style, while assuring that your project will follow all [Material Design guidelines](https://material.io/).
-
-[![](https://img.shields.io/npm/v/react-benzin?logo=npm)](https://github.com/eug-vs/react-benzin/releases)
-[![](https://img.shields.io/circleci/build/github/eug-vs/react-benzin?logo=circleci)](https://github.com/eug-vs/react-benzin/commits/develop)
-[![](https://img.shields.io/david/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/network/dependencies)
-[![](https://img.shields.io/github/languages/code-size/eug-vs/react-benzin)](https://github.com/eug-vs/react-benzin/releases)
-[![](https://img.shields.io/npm/l/react-benzin)](https://github.com/eug-vs/react-benzin/blob/develop/LICENSE.md)
-
+<p align="center">
+ <a href="https://reactjs.org/">React</a> <a href="https://material-ui.com/">Material</a> library for content-display featuring Markdown rendering.
+</p>
+<p align="center">
+ <img src="https://img.shields.io/npm/v/react-benzin?logo=npm" />
+ <img src="https://img.shields.io/circleci/build/github/eug-vs/react-benzin?logo=circleci" />
+ <img src="https://img.shields.io/david/eug-vs/react-benzin" />
+ <img src="https://img.shields.io/github/languages/code-size/eug-vs/react-benzin" />
+ <img src="https://img.shields.io/npm/l/react-benzin" />
+</p>
 
 # Getting started
 ## Installation
@@ -16,25 +18,14 @@ You can easily add **BENZIN** to your project with `npm`:
 ```bash
 $ npm install react-benzin
 ```
-**BENZIN** works best in kick-starting new projects and allows you to focus on the functionality, while all the beauty will be maintained by our library.
+**TIP:** **BENZIN** is designed to work in Material-UI environment, so it's best to use them together:
+```bash
+$ npm @material-ui/core
+```
 
-**TIP:** *Create-React-App with Typescript* is your GO-TO in most of the cases. [Learn more.](https://create-react-app.dev/docs/adding-typescript/)
-
-![Preview screenshot](https://user-images.githubusercontent.com/51545008/73991116-46b04f00-495c-11ea-9733-865bcc6c8807.png)
+![Preview screenshot](https://user-images.githubusercontent.com/51545008/95653266-209d0900-0b00-11eb-9a0a-f3aa81c878e5.png)
 
 You can find a minimal usage example [here](src/index.tsx).
-
-## Functionality
-**BENZIN** provides you with a bunch of cool components that greatly integrate with each other. 
-
-[Explore](src/lib) `src/lib/` folder to see what's available. Documentation is yet to come, but for now you can enjoy type definitons.
-
-[Chrono-Cube](https://github.com/eug-vs/chrono-cube/) will also be a great example of usage, since it's the actual project which inspired us to create **BENZIN**.
- 
- 
-# Explore NPM package online
-https://www.npmjs.com/package/react-benzin 
-
 
 # Development
 ## Running live demo
