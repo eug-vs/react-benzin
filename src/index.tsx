@@ -99,7 +99,8 @@ const LivePreviewPage: React.FC<LivePropTypes> = ({ setLivePreviewData }) => {
       <ContentSection sectionName="Markdown live preview" level={2}>
         <p>
           Start typing and see your text rendered on the left window!
-          You can find the list of all Markdown features {' '}
+          You can find the list of all Markdown features
+          {' '}
           <Link href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">
             here
           </Link>
