@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "851b7a049a62e15cc56f5a115279a916",
+    "revision": "19a87e1823043f53ddc2d90930df89d8",
     "url": "/react-benzin/index.html"
   },
   {
-    "revision": "f2f10b3731215cf81161",
+    "revision": "6a0bb65b8d022a576397",
     "url": "/react-benzin/static/css/2.4391b94e.chunk.css"
   },
   {
-    "revision": "f2f10b3731215cf81161",
-    "url": "/react-benzin/static/js/2.a7931ec3.chunk.js"
+    "revision": "6a0bb65b8d022a576397",
+    "url": "/react-benzin/static/js/2.8a515fee.chunk.js"
   },
   {
     "revision": "3adc01bea76e7956dc3633ee898f6936",
-    "url": "/react-benzin/static/js/2.a7931ec3.chunk.js.LICENSE.txt"
+    "url": "/react-benzin/static/js/2.8a515fee.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d4e253a4adc212be7e5f",
-    "url": "/react-benzin/static/js/main.4193a873.chunk.js"
+    "revision": "e4b802ffe13e7561d69a",
+    "url": "/react-benzin/static/js/main.508ed0a4.chunk.js"
   },
   {
     "revision": "1cb71c360947ee2e6bc9",
