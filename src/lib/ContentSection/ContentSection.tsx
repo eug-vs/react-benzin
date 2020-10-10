@@ -16,10 +16,6 @@ const useStyles = makeStyles(theme => ({
   content: {
     padding: theme.spacing(2, 2, 1, 3),
     marginBottom: theme.spacing(1),
-
-    '& .MuiButton-root': {
-      margin: theme.spacing(1, 2, 2, 0),
-    },
   },
 }));
 

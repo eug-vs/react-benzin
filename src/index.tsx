@@ -1,28 +1,25 @@
 import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
-
 import {
   makeStyles,
   TextField,
   Button,
   Link,
 } from '@material-ui/core';
-
 import {
   Benzin,
-  Header,
-  Window,
   Markdown,
   ContentSection,
 } from './lib';
 
+import Header from './demo/Header/Header';
+import Window from './demo/Window/Window';
 import icon from './assets/icon.svg';
 
 interface RenderPropTypes {
   index: number;
   style: React.CSSProperties;
 }
-
 
 const useStyles = makeStyles(theme => ({
   window: {
@@ -102,7 +99,8 @@ const LivePreviewPage: React.FC<LivePropTypes> = ({ setLivePreviewData }) => {
       <ContentSection sectionName="Markdown live preview" level={2}>
         <p>
           Start typing and see your text rendered on the left window!
-          You can find the list of all Markdown features {' '}
+          You can find the list of all Markdown features
+          {' '}
           <Link href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">
             here
           </Link>
