@@ -16,11 +16,6 @@ import Header from './demo/Header/Header';
 import Window from './demo/Window/Window';
 import icon from './assets/icon.svg';
 
-interface RenderPropTypes {
-  index: number;
-  style: React.CSSProperties;
-}
-
 const useStyles = makeStyles(theme => ({
   window: {
     padding: theme.spacing(4),
