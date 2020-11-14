@@ -8,6 +8,10 @@ interface PropTypes extends ParserPropTypes {
   level?: number;
 }
 
+interface MapperPropTypes extends PropTypes {
+  SectionComponent: React.FC<PropTypes>;
+}
+
 const getHeaderLevel = (header: string): number => {
   if (!header) return 0;
   let level = 0;
@@ -15,17 +19,20 @@ const getHeaderLevel = (header: string): number => {
   return level;
 };
 
-const ChildrenSections: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
-  const childrenSectionLines = rawLines.reduce((sections: string[][], line: string) => {
-    if (line) {
-      if (getHeaderLevel(line) === level) sections.push([]);
-      if (sections.length) sections[sections.length - 1].push(line);
-    }
-    return sections;
-  }, []);
-  const children = childrenSectionLines.map(sectionLines => <Section rawLines={sectionLines} level={level} />);
+const SectionMapper: React.FC<MapperPropTypes> = ({ rawLines, level = 0, SectionComponent }) => {
+  const children = rawLines
+    .reduce((sections: string[][], line: string) => {
+      if (line) {
+        if (getHeaderLevel(line) === level) sections.push([]);
+        if (sections.length) sections[sections.length - 1].push(line);
+      }
+      return sections;
+    }, [])
+    .map(sectionLines => <SectionComponent rawLines={sectionLines} level={level} />);
+
   return <>{children}</>;
 };
+
 
 const Section: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
   const deeperLevelIndex = rawLines.findIndex(line => line.match(`^#{${level + 1},} .*$`));
@@ -35,7 +42,7 @@ const Section: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
     return (
       <>
         <Typography><Content rawLines={rawContent} /></Typography>
-        <ChildrenSections rawLines={rawLines} level={getHeaderLevel(rawLines[0])} />
+        <SectionMapper rawLines={rawLines} level={getHeaderLevel(rawLines[0])} SectionComponent={Section} />
       </>
     );
   }
@@ -45,7 +52,7 @@ const Section: React.FC<PropTypes> = ({ rawLines, level = 0 }) => {
   return (
     <ContentSection sectionName={sectionName} level={level}>
       <Content rawLines={rawContent} />
-      <ChildrenSections rawLines={rawLines} level={deeperLevel} />
+      <SectionMapper rawLines={rawLines} level={deeperLevel} SectionComponent={Section} />
     </ContentSection>
   );
 };
