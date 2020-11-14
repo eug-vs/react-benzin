@@ -51,7 +51,7 @@ const Header: React.FC<PropTypes> = ({
 }) => {
   const classes = useStyles();
 
-  const handleChange = (event: React.ChangeEvent<{}>, newPage: string): void => {
+  const handleChange = (event: React.ChangeEvent<unknown>, newPage: string): void => {
     setPage(newPage);
   };
 
