@@ -4,6 +4,8 @@ import {
   Typography,
   Divider,
   makeStyles,
+  useMediaQuery,
+  Theme,
 } from '@material-ui/core';
 
 
@@ -14,13 +16,19 @@ interface PropTypes {
 
 const useStyles = makeStyles(theme => ({
   content: {
-    padding: theme.spacing(2, 2, 1, 3),
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(2, 2, 1, 3),
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2, 0),
+    },
     marginBottom: theme.spacing(1),
   },
 }));
 
 const ContentSection: React.FC<PropTypes> = ({ sectionName, children, level = 0 }) => {
   const classes = useStyles();
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
   let adjustedLevel = level + 2; // Make everything smaller
   if (adjustedLevel > 6) adjustedLevel = 6;
@@ -31,7 +39,7 @@ const ContentSection: React.FC<PropTypes> = ({ sectionName, children, level = 0 
   return (
     <>
       <Typography variant={variant}>{sectionName}</Typography>
-      <Divider variant="middle" />
+      <Divider variant={isMobile ? 'fullWidth' : 'middle'} />
       <Typography component="div" className={classes.content}>
         {children}
       </Typography>
