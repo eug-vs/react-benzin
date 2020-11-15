@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/react-benzin/static/js/main.b1c0fcc6.chunk.js",
-    "main.js.map": "/react-benzin/static/js/main.b1c0fcc6.chunk.js.map",
+    "main.js": "/react-benzin/static/js/main.9b394787.chunk.js",
+    "main.js.map": "/react-benzin/static/js/main.9b394787.chunk.js.map",
     "runtime-main.js": "/react-benzin/static/js/runtime-main.9be257cd.js",
     "runtime-main.js.map": "/react-benzin/static/js/runtime-main.9be257cd.js.map",
     "static/css/2.6bcb1627.chunk.css": "/react-benzin/static/css/2.6bcb1627.chunk.css",
-    "static/js/2.de7f86bf.chunk.js": "/react-benzin/static/js/2.de7f86bf.chunk.js",
-    "static/js/2.de7f86bf.chunk.js.map": "/react-benzin/static/js/2.de7f86bf.chunk.js.map",
+    "static/js/2.5b3b7f88.chunk.js": "/react-benzin/static/js/2.5b3b7f88.chunk.js",
+    "static/js/2.5b3b7f88.chunk.js.map": "/react-benzin/static/js/2.5b3b7f88.chunk.js.map",
     "index.html": "/react-benzin/index.html",
     "static/css/2.6bcb1627.chunk.css.map": "/react-benzin/static/css/2.6bcb1627.chunk.css.map",
-    "static/js/2.de7f86bf.chunk.js.LICENSE.txt": "/react-benzin/static/js/2.de7f86bf.chunk.js.LICENSE.txt",
+    "static/js/2.5b3b7f88.chunk.js.LICENSE.txt": "/react-benzin/static/js/2.5b3b7f88.chunk.js.LICENSE.txt",
     "static/media/icon.50d2b01a.svg": "/react-benzin/static/media/icon.50d2b01a.svg",
     "static/media/index.css": "/react-benzin/static/media/roboto-latin-900italic.cb5ad999.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.9be257cd.js",
     "static/css/2.6bcb1627.chunk.css",
-    "static/js/2.de7f86bf.chunk.js",
-    "static/js/main.b1c0fcc6.chunk.js"
+    "static/js/2.5b3b7f88.chunk.js",
+    "static/js/main.9b394787.chunk.js"
   ]
 }
