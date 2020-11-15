@@ -1,6 +1,6 @@
 {
   "name": "react-benzin",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "A powerful React Material components library.",
   "homepage": "https://eug-vs.github.io/react-benzin",
   "main": "dist/index.js",
