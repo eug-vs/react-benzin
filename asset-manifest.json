@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/react-benzin/static/js/main.9b394787.chunk.js",
-    "main.js.map": "/react-benzin/static/js/main.9b394787.chunk.js.map",
+    "main.js": "/react-benzin/static/js/main.1bea423d.chunk.js",
+    "main.js.map": "/react-benzin/static/js/main.1bea423d.chunk.js.map",
     "runtime-main.js": "/react-benzin/static/js/runtime-main.9be257cd.js",
     "runtime-main.js.map": "/react-benzin/static/js/runtime-main.9be257cd.js.map",
     "static/css/2.6bcb1627.chunk.css": "/react-benzin/static/css/2.6bcb1627.chunk.css",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.9be257cd.js",
     "static/css/2.6bcb1627.chunk.css",
     "static/js/2.5b3b7f88.chunk.js",
-    "static/js/main.9b394787.chunk.js"
+    "static/js/main.1bea423d.chunk.js"
   ]
 }
