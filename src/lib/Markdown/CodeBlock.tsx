@@ -1,8 +1,9 @@
 import React from 'react';
-import { Paper } from '@material-ui/core';
+import { Paper, makeStyles } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { ParserPropTypes } from './types';
+interface PropTypes {
+  value: string;
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,11 +15,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CodeBlock: React.FC<ParserPropTypes> = ({ rawLines }) => {
+const CodeBlock: React.FC<PropTypes> = ({ value }) => {
   const classes = useStyles();
   return (
     <Paper variant="outlined" className={classes.root}>
-      {rawLines.map(line => <pre>{line}</pre>)}
+      <pre>
+        {value}
+      </pre>
     </Paper>
   );
 };
