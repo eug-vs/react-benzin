@@ -9,7 +9,7 @@ import {
 import {
   Benzin,
   Markdown,
-  ContentSection,
+  Heading,
 } from './lib';
 
 import Header from './demo/Header/Header';
@@ -55,24 +55,23 @@ const CustomPage: React.FC = () => {
 
   return (
     <>
-      <ContentSection sectionName="Render custom markdown document" level={2}>
-        <p>
-          This should be a link to a valid markdown file. Response should give the file contents.
-          If you copy README file from GitHub, make sure you provide link to raw view.
-        </p>
-        <p>
-          <TextField
-            fullWidth
-            inputRef={inputEl}
-            variant="outlined"
-            color="secondary"
-            label="Markdown url"
-          />
-        </p>
-        <Button variant="contained" color="secondary" onClick={handleParseUrl}>
-          Render!
-        </Button>
-      </ContentSection>
+      <Heading level={2}>Render custom markdown document</Heading>
+      <p>
+        This should be a link to a valid markdown file. Response should give the file contents.
+        If you copy README file from GitHub, make sure you provide link to raw view.
+      </p>
+      <p>
+        <TextField
+          fullWidth
+          inputRef={inputEl}
+          variant="outlined"
+          color="secondary"
+          label="Markdown url"
+        />
+      </p>
+      <Button variant="contained" color="secondary" onClick={handleParseUrl}>
+        Render!
+      </Button>
       <Markdown url={url} />
     </>
   );
@@ -91,29 +90,28 @@ const LivePreviewPage: React.FC<LivePropTypes> = ({ setLivePreviewData }) => {
 
   return (
     <>
-      <ContentSection sectionName="Markdown live preview" level={2}>
-        <p>
-          Start typing and see your text rendered on the left window!
-          You can find the list of all Markdown features
-          {' '}
-          <Link href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">
-            here
-          </Link>
-          . (some of them are yet in progress).
-          We recommend starting with # Header.
-        </p>
-        <p>
-          <TextField
-            fullWidth
-            multiline
-            inputRef={inputEl}
-            variant="outlined"
-            color="primary"
-            label="Markdown"
-            onChange={handleRender}
-          />
-        </p>
-      </ContentSection>
+      <Heading level={2}>Markdown live preview</Heading>
+      <p>
+        Start typing and see your text rendered on the left window!
+        You can find the list of all Markdown features
+        {' '}
+        <Link href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">
+          here
+        </Link>
+        . (some of them are yet in progress).
+        We recommend starting with # Header.
+      </p>
+      <p>
+        <TextField
+          fullWidth
+          multiline
+          inputRef={inputEl}
+          variant="outlined"
+          color="primary"
+          label="Markdown"
+          onChange={handleRender}
+        />
+      </p>
     </>
   );
 };
