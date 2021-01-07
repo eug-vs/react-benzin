@@ -32,7 +32,7 @@ const Icon = <img src={icon} width="32px" height="37px" alt="logo" />;
 
 const headerContents = {
   home: null,
-  spacevim: null,
+  dotfiles: null,
   'material-ui': null,
   custom: null,
   'live preview': null,
@@ -40,8 +40,8 @@ const headerContents = {
 
 const pageMap: Record<string, string> = {
   home: 'https://raw.githubusercontent.com/eug-vs/react-benzin/develop/README.md',
-  spacevim: 'https://raw.githubusercontent.com/spacevim/spacevim/master/README.md',
   'material-ui': 'https://raw.githubusercontent.com/mui-org/material-ui/master/README.md',
+  dotfiles: 'https://raw.githubusercontent.com/eug-vs/dotfiles/master/.github/README.md',
 };
 
 
