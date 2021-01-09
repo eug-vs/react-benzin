@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link, Typography } from '@material-ui/core';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
-import { Link, Typography } from '@material-ui/core';
+import emoji from 'remark-gemoji';
 
 import CodeBlock from './CodeBlock';
 import InlineCode from './InlineCode';
@@ -44,7 +45,13 @@ const Markdown: React.FC<PropTypes> = ({ data, url }) => {
 
   return (
     <Typography>
-      <ReactMarkdown renderers={renderers} allowDangerousHtml>{sanitized}</ReactMarkdown>
+      <ReactMarkdown
+        renderers={renderers}
+        plugins={[emoji]}
+        allowDangerousHtml
+      >
+        {sanitized}
+      </ReactMarkdown>
     </Typography>
   );
 };
