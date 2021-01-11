@@ -12,7 +12,7 @@ import Image from './Image';
 interface PropTypes {
   data?: string;
   url?: string;
-  context?: any;
+  context?: Record<string, any>;
 }
 
 const resolveUrls = (line: string, baseUrl: string): string => line.replace(
@@ -34,20 +34,23 @@ const Markdown: React.FC<PropTypes> = ({ data, url, context = {} }) => {
   }, [data, url]);
 
   const baseUrl = url?.slice(0, url.lastIndexOf('/')) || '';
-
   const sanitized = resolveUrls(markdown, baseUrl);
+
+  const WrappedInlineCode: React.FC = ({ children }) => {
+    if (typeof children === 'string' && children?.startsWith('$')) {
+      const symbol = children.slice(1);
+      return context[symbol] || null;
+    }
+    return <InlineCode>{children}</InlineCode>;
+  };
 
   const renderers = {
     heading: Heading,
-    inlineCode: InlineCode,
+    code: CodeBlock,
     link: Link,
     image: Image,
-    code: ({ language, value }: any) => {
-      if (language === 'react') return context[value] || null;
-      return CodeBlock({ value });
-    },
+    inlineCode: WrappedInlineCode,
   };
-
 
   return (
     <Typography>
