@@ -12,6 +12,7 @@ import Image from './Image';
 interface PropTypes {
   data?: string;
   url?: string;
+  context?: any;
 }
 
 const resolveUrls = (line: string, baseUrl: string): string => line.replace(
@@ -22,15 +23,8 @@ const resolveUrls = (line: string, baseUrl: string): string => line.replace(
   (match, text, url) => `[${text}](${baseUrl}/${url})`,
 );
 
-const renderers = {
-  heading: Heading,
-  inlineCode: InlineCode,
-  code: CodeBlock,
-  link: Link,
-  image: Image,
-};
 
-const Markdown: React.FC<PropTypes> = ({ data, url }) => {
+const Markdown: React.FC<PropTypes> = ({ data, url, context = {} }) => {
   const [markdown, setMarkdown] = useState<string>(data || '');
 
   if (url) axios.get(url).then(response => setMarkdown(response.data));
@@ -43,15 +37,26 @@ const Markdown: React.FC<PropTypes> = ({ data, url }) => {
 
   const sanitized = resolveUrls(markdown, baseUrl);
 
+  const renderers = {
+    heading: Heading,
+    inlineCode: InlineCode,
+    link: Link,
+    image: Image,
+    code: ({ language, value }: any) => {
+      if (language === 'react') return context[value] || null;
+      return CodeBlock({ value });
+    },
+  };
+
+
   return (
     <Typography>
       <ReactMarkdown
+        source={sanitized}
         renderers={renderers}
         plugins={[emoji]}
         allowDangerousHtml
-      >
-        {sanitized}
-      </ReactMarkdown>
+      />
     </Typography>
   );
 };
