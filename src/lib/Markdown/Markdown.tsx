@@ -12,6 +12,7 @@ import Image from './Image';
 interface PropTypes {
   data?: string;
   url?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   context?: Record<string, any>;
 }
 
