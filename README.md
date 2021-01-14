@@ -2,7 +2,7 @@
 <h1 align="center"> BENZIN </h1>
 
 <p align="center">
- <a href="https://reactjs.org/">React</a> <a href="https://material-ui.com/">Material</a> library for content-display featuring Markdown rendering.
+ <a href="https://reactjs.org/">React</a> <a href="https://material-ui.com/">Material</a> library for content-display featuring context-aware Markdown rendering.
 </p>
 <p align="center">
  <img src="https://img.shields.io/npm/v/react-benzin?logo=npm" />
@@ -18,14 +18,41 @@ You can easily add **BENZIN** to your project with `npm`:
 ```bash
 $ npm install react-benzin
 ```
-**TIP:** **BENZIN** is designed to work in Material-UI environment, so it's best to use them together:
+**BENZIN** is designed to work in Material-UI environment, so it's best to use them together:
 ```bash
-$ npm @material-ui/core
+$ npm install @material-ui/core
 ```
 
-![Preview screenshot](https://user-images.githubusercontent.com/51545008/95653266-209d0900-0b00-11eb-9a0a-f3aa81c878e5.png)
+## Usage
+One can use `$variableName` syntax (with backticks around!) to access `context.variableName` from within markdown.
 
-You can find a minimal usage example [here](src/index.tsx).
+Consider following markdown **source.md:**
+```markdown
+# Hello, world!
+ - I can render markdown
+ - My name is `$name`
+
+I can also display button below:
+
+`$button`
+```
+
+We can render it using `<Markdown>` component:
+```typescript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Markdown } from 'react-benzin';
+import { Button } from '@material-ui/core';
+import source from './source.md'; // This import resolves into file url
+
+const name = 'John Doe';
+const button = <Button variant="contained" color="primary">Click me</Button>;
+
+ReactDOM.render(<Markdown url={source} context={{ name, button }}/>, document.getElementById('root'));
+```
+
+
+![Preview screenshot](https://user-images.githubusercontent.com/51545008/104624821-182b1000-56a5-11eb-8d25-728f85206b26.png)
 
 # Development
 ## Running live demo
@@ -53,3 +80,7 @@ This command will generate `dist/` folder ready for distribution, which you of c
 Publishing to `npm` is fully automated through **CircleCI** - package is deployed on every push into `master`. Therefore only release *PR*'s should be merged into `master` branch.
 
 Deploying to `gh-pages` is automatically performed on every commit into `develop` branch.
+
+# See also
+ - [remark](https://github.com/remarkjs/remark)
+ - [MDX](https://github.com/mdx-js/mdx)

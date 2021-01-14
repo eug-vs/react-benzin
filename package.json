@@ -1,6 +1,6 @@
 {
   "name": "react-benzin",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "description": "A powerful React Material components library.",
   "homepage": "https://eug-vs.github.io/react-benzin",
   "main": "dist/index.js",
@@ -24,6 +24,8 @@
     "emojilib": "^2.4.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-markdown": "^5.0.3",
+    "remark-gemoji": "^6.0.0",
     "typeface-roboto": "1.1.13"
   },
   "devDependencies": {
