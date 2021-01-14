@@ -4,9 +4,9 @@ Switch between tabs on the header to explore other markdown templates. :recycle:
 Templates on the left are being loaded from the [GitHub](https://github.com), though this pane is generated from plaintext. :pen:
 ## How do I use this feature?
 ```
-import Markdown from \'react-benzin\';
-const data = \'# Header\\nHello, *world!*\';
-ReactDOM.render(<Markdown data={data}/>, document.getElementById(\'root\'));
+import Markdown from 'react-benzin';
+const data = '# Header\nHello, *world!*';
+ReactDOM.render(<Markdown data={data}/>, document.getElementById('root'));
 ```
 
 `$tryButton`
