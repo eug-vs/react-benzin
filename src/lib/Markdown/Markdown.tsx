@@ -10,10 +10,12 @@ import Heading from './Heading';
 import Image from './Image';
 
 interface PropTypes {
-  data?: string;
+  source?: string;
   url?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   context?: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  plugins?: any[]
 }
 
 const resolveUrls = (line: string, baseUrl: string): string => line.replace(
@@ -24,33 +26,45 @@ const resolveUrls = (line: string, baseUrl: string): string => line.replace(
   (match, text, url) => `[${text}](${baseUrl}/${url})`,
 );
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const WrappedInlineCode = (context: Record<string, any>): React.FC => ({ children }) => {
+  if (typeof children === 'string' && children?.startsWith('$')) {
+    const symbol = children.slice(1);
+    return context[symbol] || null;
+  }
+  return <InlineCode>{children}</InlineCode>;
+};
 
-const Markdown: React.FC<PropTypes> = ({ data, url, context = {} }) => {
-  const [markdown, setMarkdown] = useState<string>(data || '');
-
-  if (url) axios.get(url).then(response => setMarkdown(response.data));
+const Markdown: React.FC<PropTypes> = ({
+  children,
+  url,
+  source,
+  context = {},
+  plugins = [],
+}) => {
+  const [markdown, setMarkdown] = useState<string>(source || '');
 
   useEffect(() => {
-    if (!url) setMarkdown(data || '');
-  }, [data, url]);
+    if (url) axios.get(url).then(response => setMarkdown(response.data));
+  }, [url]);
+
+  useEffect(() => {
+    if (source) setMarkdown(source);
+  }, [source]);
+
+  useEffect(() => {
+    if (children && typeof children === 'string') setMarkdown(children);
+  }, [children]);
 
   const baseUrl = url?.slice(0, url.lastIndexOf('/')) || '';
   const sanitized = resolveUrls(markdown, baseUrl);
-
-  const WrappedInlineCode: React.FC = ({ children }) => {
-    if (typeof children === 'string' && children?.startsWith('$')) {
-      const symbol = children.slice(1);
-      return context[symbol] || null;
-    }
-    return <InlineCode>{children}</InlineCode>;
-  };
 
   const renderers = {
     heading: Heading,
     code: CodeBlock,
     link: Link,
     image: Image,
-    inlineCode: WrappedInlineCode,
+    inlineCode: WrappedInlineCode(context),
   };
 
   return (
@@ -58,7 +72,7 @@ const Markdown: React.FC<PropTypes> = ({ data, url, context = {} }) => {
       <ReactMarkdown
         source={sanitized}
         renderers={renderers}
-        plugins={[emoji]}
+        plugins={[emoji, ...plugins]}
         allowDangerousHtml
       />
     </Typography>
