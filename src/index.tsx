@@ -133,7 +133,7 @@ const App: React.FC = () => {
   let primaryWindowContent = <Markdown url={url} />;
   if (page === 'custom') primaryWindowContent = <CustomPage />;
   else if (page === 'live preview') {
-    primaryWindowContent = <Markdown data={livePreviewData || '# Start typing in the right window!'} />;
+    primaryWindowContent = <Markdown source={livePreviewData || '# Start typing in the right window!'} />;
   }
 
   const tryButton = (
