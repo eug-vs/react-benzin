@@ -14,6 +14,8 @@ interface PropTypes {
   url?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   context?: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  plugins?: any[]
 }
 
 const resolveUrls = (line: string, baseUrl: string): string => line.replace(
@@ -38,6 +40,7 @@ const Markdown: React.FC<PropTypes> = ({
   url,
   source,
   context = {},
+  plugins = [],
 }) => {
   const [markdown, setMarkdown] = useState<string>(source || '');
 
@@ -69,7 +72,7 @@ const Markdown: React.FC<PropTypes> = ({
       <ReactMarkdown
         source={sanitized}
         renderers={renderers}
-        plugins={[emoji]}
+        plugins={[emoji, ...plugins]}
         allowDangerousHtml
       />
     </Typography>
